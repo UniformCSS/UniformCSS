@@ -1,0 +1,41 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: grid-auto-flow;
+$shorthand: grid-flow;
+$responsive: true;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (grid-auto-flow);
+$custom-properties: ();
+
+$variants: (
+  row: row,
+  col: column,
+  row-dense: row dense,
+  col-dense: column dense
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

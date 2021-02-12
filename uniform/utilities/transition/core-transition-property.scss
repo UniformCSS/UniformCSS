@@ -1,0 +1,59 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: transition-property;
+$shorthand: transition;
+$responsive: false;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (transition-property);
+$custom-properties: ();
+
+$variants: (
+	none: none,
+	all: all,
+	null: (
+		background-color,
+		border-color,
+		color,
+		fill,
+		stroke,
+		opacity,
+		box-shadow,
+		transform,
+	),
+	colors: (
+		background-color,
+		border-color,
+		color,
+		fill,
+		stroke,
+	),
+	opacity: opacity,
+	shadow: box-shadow,
+	transform: transform,
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

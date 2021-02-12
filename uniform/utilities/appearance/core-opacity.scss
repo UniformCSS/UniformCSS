@@ -1,0 +1,48 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: opacity;
+$shorthand: opacity;
+$responsive: true;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (opacity);
+$custom-properties: ();
+
+$variants: (
+  0: 0,
+  10: 0.1,
+  20: 0.2,
+  30: 0.3,
+  40: 0.4,
+  50: 0.5,
+  60: 0.6,
+  70: 0.7,
+  80: 0.8,
+  90: 0.9,
+  100: 1
+);
+
+$pseudos: (hover, active, dark);
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

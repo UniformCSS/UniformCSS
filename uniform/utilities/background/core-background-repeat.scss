@@ -1,0 +1,43 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: background-repeat;
+$shorthand: bg;
+$responsive: false;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (background-repeat);
+$custom-properties: ();
+
+$variants: (
+  repeat: repeat,
+  repeat-x: repeat-x,
+  repeat-y: repeat-y,
+  no-repeat: no-repeat,
+  space: space,
+  round: round
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

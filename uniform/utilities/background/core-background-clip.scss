@@ -1,0 +1,41 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: background-clip;
+$shorthand: bg;
+$responsive: false;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (background-clip, -webkit-background-clip);
+$custom-properties: ();
+
+$variants: (
+	border: border-box,
+	padding: padding-box,
+	content: content-box,
+	text: text,
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

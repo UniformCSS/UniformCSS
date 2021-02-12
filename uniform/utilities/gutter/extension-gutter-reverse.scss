@@ -1,0 +1,43 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: gutter-reverse;
+$shorthand: gutter-reverse;
+$responsive: true;
+$responsive-pseudos: false;
+$extra-selector: '> * + *';
+
+$properties: (margin);
+$custom-properties: (
+  --gutter-right: 1,
+  --gutter-left: 0,
+  --gutter-top: 1,
+  --gutter-bottom: 0,
+);
+
+$variants: (
+  null: null
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

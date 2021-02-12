@@ -1,0 +1,44 @@
+@use "uniform/core";
+@use "sass:map";
+@use "sass:string";
+
+$name: backdrop-filter; 
+$shorthand: backdrop;
+$responsive: false;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (backdrop-filter, -webkit-backdrop-filter);
+$custom-properties: (
+  --backdrop-blur: 0,
+  --backdrop-grayscale: 0,
+  --backdrop-saturate: 1,
+  --backdrop-invert: 0,
+);
+
+$variants: (
+  null: blur(var(--backdrop-blur)) string.unquote("grayscale(var(--backdrop-grayscale))") string.unquote("saturate(var(--backdrop-saturate))") string.unquote("invert(var(--backdrop-invert))")
+);
+
+$pseudos: (hover, group-hover);
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

@@ -1,0 +1,80 @@
+@use "sass:map";
+@use "sass:list";
+@use "uniform/core" as *;
+
+$exclude: map.get($all-config, exclude);
+$include: map.get($all-config, include);
+
+@if ( list.index($include, default-reset) != null or list.index($exclude, all) == null and list.index($exclude, default-reset) == null ) {
+
+  /* Reset everything */
+  *,*::before,*::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0 solid #000;
+  }
+
+  /* Prevent iOS font size change */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reset body line-height */
+  body {
+    min-height: 100vh;
+    line-height: 1;
+  }
+
+  /* All media elements set to block */
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+    width: 100%;
+    vertical-align: middle;
+  }
+
+  /* Collapse table */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* Remove list style */
+  ol,ul {
+    list-style: none;
+  }
+
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+    scroll-behavior: auto;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

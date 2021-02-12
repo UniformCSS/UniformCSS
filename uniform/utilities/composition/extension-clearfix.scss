@@ -1,0 +1,11 @@
+@use "uniform/core" as *;
+
+@if $headless == false {
+	.#{$prefix}clearfix {
+		&::after {
+			content: '' if($important == true, !important, null);
+			display: table if($important == true, !important, null);
+			clear: both if($important == true, !important, null);
+		}
+	}
+}

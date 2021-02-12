@@ -1,0 +1,43 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: split-reverse;
+$shorthand: split-reverse;
+$responsive: true;
+$responsive-pseudos: false;
+$extra-selector: '> * + *';
+
+$properties: (margin);
+$custom-properties: (
+  --split-right: 1,
+  --split-left: 0,
+  --split-top: 1,
+  --split-bottom: 0,
+);
+
+$variants: (
+  null: null
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

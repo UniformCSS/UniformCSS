@@ -1,0 +1,69 @@
+@use "sass:map";
+@use "sass:list";
+@use "uniform/core" as *;
+
+$exclude: map.get($all-config, exclude);
+$include: map.get($all-config, include);
+
+@if ( list.index($include, default-starter) != null or list.index($exclude, all) == null and list.index($exclude, default-starter) == null ) {
+  html {
+    background-color: var(--background-color, white);
+  }
+
+  body {
+    font-size: var(--body-font-size, 1rem);
+    font-weight: var(--body-font-weight, var(--font-regular));
+    line-height: var(--body-leading, 1);
+    background-color: var(--body-background-color, white);
+    color: var(--body-text-color, black);
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    line-height: var(--heading-leading, leading(tighter));
+    margin-bottom: var(--heading-margin, 0.5em);
+    color: var(--heading-color, black);
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  p {
+    line-height: var(--paragraph-leading, leading(base));
+    margin-bottom: var(--paragraph-margin, 1.5rem);
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--link-color, RoyalBlue);
+    &:hover {
+      color: var(--link-hover-color, RoyalBlue);
+    }
+  }
+
+  b,strong {
+    font-weight: var(--bold-font-weight, font-weight(bold));
+  }
+
+  sub,sup {
+    position: relative;
+    font-size: .75em;
+  }
+
+  sub {
+    bottom: -0.25em;
+    left: 0.25em;
+  }
+
+  sup {
+    top: -0.5em;
+    left: 0.25em;
+  }
+
+  pre,code {
+		font-family: font-family(mono);
+	}
+}

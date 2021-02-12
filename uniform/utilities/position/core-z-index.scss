@@ -1,0 +1,57 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: z-index;
+$shorthand: z;
+$responsive: false;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (z-index);
+$custom-properties: ();
+
+$variants: (
+  auto: auto,
+  n9: -9,
+  n8: -8,
+  n7: -7,
+  n6: -6,
+  n5: -5,
+  n4: -4,
+  n3: -3,
+  n2: -2,
+  n1: -1,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

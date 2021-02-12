@@ -1,0 +1,39 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: backdrop-grayscale; 
+$shorthand: backdrop-grayscale;
+$responsive: false;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (--backdrop-grayscale);
+$custom-properties: ();
+
+$variants: (
+  0: 0,
+  null: 1,
+);
+
+$pseudos: (hover, group-hover);
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

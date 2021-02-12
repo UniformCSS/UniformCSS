@@ -1,0 +1,10 @@
+@use "uniform/core" as *;
+
+@if $headless == false {
+	.#{$prefix}absolute-center {
+		position: absolute if($important == true, !important, null);
+		top: 50% if($important == true, !important, null);
+		left: 50% if($important == true, !important, null);
+		transform: translateX(-50%) translateY(-50%) if($important == true, !important, null);
+	}
+}

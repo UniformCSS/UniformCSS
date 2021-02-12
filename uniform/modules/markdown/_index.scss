@@ -1,0 +1,209 @@
+@use "uniform/core" as *;
+@use "sass:map";
+@use "sass:list";
+
+$exclude: map.get($all-config, exclude);
+$include: map.get($all-config, include);
+
+@if ( list.index($include, module-markdown) != null or list.index($exclude, all) == null and list.index($exclude, module-markdown) == null ) {
+
+  .markdown {
+
+    font-size: font-size(base);
+
+    /******************************
+    HEADING
+
+    --markdown-h1-margin-top
+    --markdown-h1-margin-bottom
+    --markdown-h1-size
+    --markdown-h1-weight
+    --markdown-h1-tracking
+
+    --markdown-h2-margin-top
+    --markdown-h2-margin-bottom
+    --markdown-h2-size
+    --markdown-h2-weight
+    --markdown-h2-tracking
+
+    --markdown-h3-margin-top
+    --markdown-h3-margin-bottom
+    --markdown-h3-size
+    --markdown-h3-weight
+    --markdown-h3-tracking
+
+    --markdown-h4-margin-top
+    --markdown-h4-margin-bottom
+    --markdown-h4-size
+    --markdown-h4-weight
+    --markdown-h4-tracking
+    ******************************/
+
+    & > h1, 
+    & > h2,
+    & > h3,
+    & > h4,
+    & > h5,
+    & > h6 {
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    & > h1 {
+      margin-top: var(--markdown-h1-margin-top, size(48));
+      margin-bottom: var(--markdown-h1-margin-bottom, size(18));
+      font-size: var(--markdown-h1-size, font-size(6xl));
+      font-weight: var(--markdown-h1-weight, font-weight(extrabold));
+      letter-spacing: var(--markdown-h1-tracking, tracking(tight));
+    }
+
+    & > h2 {
+      margin-top: var(--markdown-h2-margin-top, size(40));
+      margin-bottom: var(--markdown-h2-margin-bottom, size(18));
+      font-size: var(--markdown-h2-size, font-size(2xl));
+      font-weight: var(--markdown-h2-weight, font-weight(extrabold));
+      letter-spacing: var(--markdown-h2-tracking, tracking(tight));
+    }
+
+    & > h3 {
+      margin-top: var(--markdown-h3-margin-top, size(36));
+      margin-bottom: var(--markdown-h3-margin-bottom, size(16));
+      font-size: var(--markdown-h3-size, font-size(xl));
+      font-weight: var(--markdown-h3-weight, font-weight(extrabold));
+      letter-spacing: var(--markdown-h3-tracking, tracking(tight));
+    }
+
+    & > h4 {
+      margin-top: var(--markdown-h4-margin-top, size(32));
+      margin-bottom: var(--markdown-h4-margin-bottom, size(14));
+      font-size: var(--markdown-h4-size, font-size(lg));
+      font-weight: var(--markdown-h4-weight, font-weight(extrabold));
+      letter-spacing: var(--markdown-h4-tracking, tracking(tight));
+    }
+
+    /******************************
+    HORIZONTAL RULE
+
+    --markdown-hr-width
+    --markdown-hr-margin
+    --markdown-hr-color
+    ******************************/
+
+    & > hr {
+      height: var(--markdown-hr-width, 1px);
+      margin-top: var(--markdown-hr-margin, size(64));
+      margin-bottom: var(--markdown-hr-margin, size(64));
+      border: 0;
+      background: var(--markdown-hr-color, #e3e5e8);
+    }
+
+    /******************************
+    CODE
+
+    --markdown-code-padding
+    --markdown-code-font-size
+    --markdown-code-radius
+    --markdown-code-bg
+    --markdown-code-border
+    --markdown-code-color
+    ******************************/
+    
+    & > p code, & > ul li code, & > blockquote code {
+      padding: var(--markdown-code-padding, 5px 6px);
+      font-size: var(--markdown-code-font-size, font-size(sm));
+      border-radius: var(--markdown-code-radius, radius(sm));
+      background: var(--markdown-code-bg, fill(blue, base, base, opacity-10));
+      border: var(--markdown-code-border, 0);
+      color: var(--markdown-code-color, fill(blue, brighten-6, lighten-1));
+    }
+
+    /******************************
+    BLOCKQUOTE
+
+    --markdown-blockquote-margin
+    --markdown-blockquote-padding
+    --markdown-blockquote-bg
+    --markdown-blockquote-radius
+    --markdown-blockquote-shadow
+    ******************************/
+
+    & > blockquote {
+      margin-bottom: var(--markdown-blockquote-margin, 1.5em);
+      padding: var(--markdown-blockquote-padding, size(14, 24));
+      background: var(--markdown-blockquote-bg, fill(silver-200));
+      border-radius: var(--markdown-blockquote-radius, radius(2xs));
+      box-shadow: var(--markdown-blockquote-shadow, inset 4px 0px 0px 0px fill(silver-400));
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    /******************************
+    TABLE
+
+    --markdown-table-margin
+    --markdown-table-font-size
+    --markdown-table-leading
+    ******************************/
+
+    & > table {
+      margin-bottom: var(--markdown-table-margin, size(20));
+      font-size: var(--markdown-table-font-size, font-size(sm));
+      line-height: var(--markdown-table-leading, leading(tight));
+    }
+
+    /******************************
+    LISTS
+
+    --markdown-list-margin
+    --markdown-list-leading
+    --markdown-list-padding
+    ******************************/
+
+    & > ol, ul {
+      margin-bottom: var(--markdown-list-margin, 1.5em);
+      line-height: var(--markdown-list-leading, leading(base));
+    }
+    
+    & > ul {
+      padding-left: var(--markdown-list-padding, size(24));
+      list-style-type: disc;
+      list-style-position: inside;
+      ul {
+        padding-left: var(--markdown-list-padding, size(24));
+        list-style-type: circle;
+        list-style-position: inside;
+      }
+    }
+    & > ol {
+      list-style-type: decimal;
+      list-style-position: inside;
+      ol {
+        list-style-type: decimal;
+        list-style-position: inside;
+      }
+    }
+
+    /******************************
+    LINK & EMPHASIS
+
+    --markdown-link-color
+    --markdown-link-hover-color
+    ******************************/
+
+    & > p a {
+      color: var(--markdown-link-color, fill(blue));
+      &:hover {
+        color: var(--markdown-link-hover-color, fill(blue));
+        text-decoration: underline;
+      }
+    }
+  }
+  
+}
+

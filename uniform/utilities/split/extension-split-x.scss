@@ -1,0 +1,51 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: split-x;
+$shorthand: split-x;
+$responsive: true;
+$responsive-pseudos: false;
+$extra-selector: '> * + *';
+
+$properties: (border-width);
+$custom-properties: (
+  --split-right: 0,
+  --split-left: 1,
+);
+
+$range-limit: map.get(core.$all-config, range-limits, split-width);
+
+$split-map: ();
+@each $size-key, $size-value in core.sizes($range-limit) {
+  $map: (
+    $size-key: 0 calc(#{$size-value} * var(--split-right)) 0 calc(#{$size-value} * var(--split-left)),
+  );
+  $split-map: map.merge($split-map, $map);
+}
+
+$variants: (
+  $split-map
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

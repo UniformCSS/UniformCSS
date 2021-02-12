@@ -1,0 +1,38 @@
+@use "uniform/core";
+@use "sass:map";
+
+$name: text-overflow;
+$shorthand: null;
+$responsive: false;
+$responsive-pseudos: false;
+$extra-selector: null;
+
+$properties: (text-overflow);
+$custom-properties: ();
+
+$variants: (
+  ellipsis: ellipsis
+);
+
+$pseudos: ();
+
+$config: (
+  utility: (
+    $name: (
+      shorthand: $shorthand,
+      responsive: $responsive,
+      responsive-pseudos: $responsive-pseudos,
+      extra-selector: $extra-selector,
+      properties: $properties,
+      custom-properties: $custom-properties,
+      variants: (
+        $variants
+      ),
+      pseudos: (
+        $pseudos
+      )
+    )
+  )
+);
+
+core.$all-config: map.deep-merge(core.$all-config, $config);

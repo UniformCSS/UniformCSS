@@ -1,0 +1,1273 @@
+@use "sass:map";
+@use "sass:list";
+@use "sass:string";
+@use "sass:meta";
+/*! UniformCSS v1.0.0 | MIT License | github.com/ThinkUniform/UniformCSS */
+
+// USER CONFIG
+// ============================================================
+
+$config: (
+  
+) !default;
+
+
+// DEFAULT CONFIG
+// ============================================================
+
+@function rem($size-in-pixel) {
+  $remSize: $size-in-pixel / 16;
+  @return #{$remSize}rem;
+}
+
+@function escape($any) {
+  $escape-chars: (
+    "!",
+    // """,
+    "#",
+    "$",
+    "%",
+    "&",
+    "'",
+    "(",
+    ")",
+    "*",
+    "+",
+    ",",
+    // "-",
+    ".",
+    "/",
+    ":",
+    ";",
+    "<",
+    "=",
+    ">",
+    "?",
+    "@",
+    "[",
+    // "\",
+    "]",
+    "^",
+    "`",
+    "{",
+    "|",
+    "}",
+    "~",
+  );
+
+	$string: "" + $any;
+	$escaped-string: "";
+	@for $x from 1 through string.length($string) {
+		$character: string.slice($string, $x, $x);
+		@if list.index($escape-chars, $character) {
+			// NOTE: `"\\..."` must be quoted.
+			$escaped-string: $escaped-string + "\\"+ $character;
+		} @else {
+			$escaped-string: $escaped-string + $character;
+		}
+	}
+	@return $escaped-string;
+}
+
+@function string-split($string, $separator) {
+  // empty array/list
+  $split-array: ();
+  // first index of separator in string
+  $index : string.index($string, $separator);
+  // loop through string
+  @while $index != null {
+    // get the substring from the first character to the separator
+    $item: string.slice($string, 1, $index - 1);
+    // push item to array
+    $split-array: append($split-array, $item);
+    // remove item and separator from string
+    $string: string.slice($string, $index + 1);
+    // find new index of separator
+    $index : string.index($string, $separator);
+  }
+  // add the remaining string to list (the last item)
+  $split-array: append($split-array, $string);
+
+  @return $split-array;
+}
+
+$default-config: (
+  important: false,
+  prefix: null,
+  delimiter: '-',
+  pseudo-delimiter: '.',
+  screen-delimiter: '.',
+
+  headless: false,
+  placeholders: false,
+  dark-mode: false,
+  god-mode: false,
+
+  excliuds: (),
+
+  include: (
+    module-button,
+    module-form,
+    module-table,
+    module-wrapper,
+    module-markdown,
+    default-starter,
+    default-reset,
+  ),
+
+  screens: (
+    sm: 768px,
+    md: 1024px,
+    lg: 1280px,
+    xl: 1536px,
+  ),
+
+  pseudos: (
+    first: ':first-child',
+    last: ':last-child',
+    first-type: ':first-of-type',
+    last-type: ':last-of-type',
+    odd: ':nth-child(odd)',
+    even: ':nth-child(even)',
+    hover: ':hover',
+    active: ':active',
+    visited: ':visited',
+    focus: ':focus',
+    disabled: ':disabled',
+    empty: ':empty',
+    focus-within: ':focus-within',
+    group-hover: ':group-hover',
+    group-focus: ':group-focus',
+  ),
+
+  brighten-levels: (
+    brighten-0: 0%,
+    brighten-1: 5%,
+    brighten-2: 10%,
+    brighten-3: 15%,
+    brighten-4: 20%,
+    brighten-5: 25%,
+    brighten-6: 30%,
+    brighten-7: 35%,
+    brighten-8: 40%,
+    brighten-9: 45%,
+    brighten-10: 50%,
+  ),
+
+  deepen-levels: (
+    deepen-0: 0%,
+    deepen-1: -5%,
+    deepen-2: -10%,
+    deepen-3: -15%,
+    deepen-4: -20%,
+    deepen-5: -25%,
+    deepen-6: -30%,
+    deepen-7: -35%,
+    deepen-8: -40%,
+    deepen-9: -45%,
+    deepen-10: -50%,
+  ),
+
+  lighten-levels: (
+    lighten-0: 0%,
+    lighten-1: 5%,
+    lighten-2: 10%,
+    lighten-3: 15%,
+    lighten-4: 20%,
+    lighten-5: 25%,
+    lighten-6: 30%,
+    lighten-7: 35%,
+    lighten-8: 40%,
+    lighten-9: 45%,
+    lighten-10: 50%,
+  ),
+
+  darken-levels: (
+    darken-0: 0%,
+    darken-1: -5%,
+    darken-2: -10%,
+    darken-3: -15%,
+    darken-4: -20%,
+    darken-5: -25%,
+    darken-6: -30%,
+    darken-7: -35%,
+    darken-8: -40%,
+    darken-9: -45%,
+    darken-10: -50%,
+  ),
+
+  opacity-levels: (
+    opacity-0: 0,
+    opacity-02: 0.02,
+    opacity-04: 0.04,
+    opacity-06: 0.06,
+    opacity-08: 0.08,
+    opacity-10: 0.1,
+    opacity-20: 0.2,
+    opacity-30: 0.3,
+    opacity-40: 0.4,
+    opacity-50: 0.5,
+    opacity-60: 0.6,
+    opacity-70: 0.7,
+    opacity-80: 0.8,
+    opacity-90: 0.9,
+    opacity-100: 1,
+  ),
+
+  primary-colors: (
+    primary: ( hue: var(--primary-hue, 225), saturation: var(--primary-sat, 50%), lightness: var(--primary-ltn, 100%) ),
+    primary-100: ( hue: var(--primary-100-hue, var(--primary-hue, 225) ), saturation: var(--primary-100-sat, var(--primary-sat, 50%) ), lightness: var(--primary-100-ltn, 90%) ),
+    primary-200: ( hue: var(--primary-200-hue, var(--primary-hue, 225) ), saturation: var(--primary-200-sat, var(--primary-sat, 50%) ), lightness: var(--primary-200-ltn, 80%) ),
+    primary-300: ( hue: var(--primary-300-hue, var(--primary-hue, 225) ), saturation: var(--primary-300-sat, var(--primary-sat, 50%) ), lightness: var(--primary-300-ltn, 70%) ),
+    primary-400: ( hue: var(--primary-400-hue, var(--primary-hue, 225) ), saturation: var(--primary-400-sat, var(--primary-sat, 50%) ), lightness: var(--primary-400-ltn, 60%) ),
+    primary-500: ( hue: var(--primary-500-hue, var(--primary-hue, 225) ), saturation: var(--primary-500-sat, var(--primary-sat, 50%) ), lightness: var(--primary-500-ltn, 50%) ),
+    primary-600: ( hue: var(--primary-600-hue, var(--primary-hue, 225) ), saturation: var(--primary-600-sat, var(--primary-sat, 50%) ), lightness: var(--primary-600-ltn, 40%) ),
+    primary-700: ( hue: var(--primary-700-hue, var(--primary-hue, 225) ), saturation: var(--primary-700-sat, var(--primary-sat, 50%) ), lightness: var(--primary-700-ltn, 30%) ),
+    primary-800: ( hue: var(--primary-800-hue, var(--primary-hue, 225) ), saturation: var(--primary-800-sat, var(--primary-sat, 50%) ), lightness: var(--primary-800-ltn, 20%) ),
+    primary-900: ( hue: var(--primary-900-hue, var(--primary-hue, 225) ), saturation: var(--primary-900-sat, var(--primary-sat, 50%) ), lightness: var(--primary-900-ltn, 10%) ),
+
+    primary-a: ( hue: var(--primary-a-hue, 200), saturation: var(--primary-a-sat, 50%), lightness: var(--primary-a-ltn, 100%) ),
+    primary-a100: ( hue: var(--primary-a100-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a100-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a100-ltn, 90%) ),
+    primary-a200: ( hue: var(--primary-a200-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a200-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a200-ltn, 80%) ),
+    primary-a300: ( hue: var(--primary-a300-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a300-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a300-ltn, 70%) ),
+    primary-a400: ( hue: var(--primary-a400-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a400-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a400-ltn, 60%) ),
+    primary-a500: ( hue: var(--primary-a500-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a500-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a500-ltn, 50%) ),
+    primary-a600: ( hue: var(--primary-a600-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a600-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a600-ltn, 40%) ),
+    primary-a700: ( hue: var(--primary-a700-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a700-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a700-ltn, 30%) ),
+    primary-a800: ( hue: var(--primary-a800-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a800-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a800-ltn, 20%) ),
+    primary-a900: ( hue: var(--primary-a900-hue, var(--primary-a-hue, 200) ), saturation: var(--primary-a900-sat, var(--primary-a-sat, 50%) ), lightness: var(--primary-a900-ltn, 10%) ),
+
+    primary-b: ( hue: var(--primary-b-hue, 180), saturation: var(--primary-b-sat, 50%), lightness: var(--primary-b-ltn, 100%) ),
+    primary-b100: ( hue: var(--primary-b100-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b100-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b100-ltn, 90%) ),
+    primary-b200: ( hue: var(--primary-b200-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b200-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b200-ltn, 80%) ),
+    primary-b300: ( hue: var(--primary-b300-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b300-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b300-ltn, 70%) ),
+    primary-b400: ( hue: var(--primary-b400-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b400-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b400-ltn, 60%) ),
+    primary-b500: ( hue: var(--primary-b500-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b500-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b500-ltn, 50%) ),
+    primary-b600: ( hue: var(--primary-b600-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b600-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b600-ltn, 40%) ),
+    primary-b700: ( hue: var(--primary-b700-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b700-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b700-ltn, 30%) ),
+    primary-b800: ( hue: var(--primary-b800-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b800-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b800-ltn, 20%) ),
+    primary-b900: ( hue: var(--primary-b900-hue, var(--primary-b-hue, 180) ), saturation: var(--primary-b900-sat, var(--primary-b-sat, 50%) ), lightness: var(--primary-b900-ltn, 10%) ),
+  ),
+
+  secondary-colors: (
+    secondary: ( hue: var(--secondary-hue, var(--secondary-hue, 10) ), saturation: var(--secondary-sat, var(--secondary-sat, 50%) ), lightness: var(--secondary-100-ltn, 70%) ),
+    secondary-a: ( hue: var(--secondary-a-hue, var(--secondary-hue, 10) ), saturation: var(--secondary-a-sat, var(--secondary-sat, 90%) ), lightness: var(--secondary-200-ltn, 60%) ),
+    secondary-b: ( hue: var(--secondary-b-hue, var(--secondary-hue, 50) ), saturation: var(--secondary-b-sat, var(--secondary-sat, 50%) ), lightness: var(--secondary-300-ltn, 70%) ),
+    secondary-c: ( hue: var(--secondary-c-hue, var(--secondary-hue, 150) ), saturation: var(--secondary-c-sat, var(--secondary-sat, 80%) ), lightness: var(--secondary-300-ltn, 40%) ),
+    secondary-d: ( hue: var(--secondary-d-hue, var(--secondary-hue, 70) ), saturation: var(--secondary-d-sat, var(--secondary-sat, 50%) ), lightness: var(--secondary-400-ltn, 70%) ),
+    secondary-e: ( hue: var(--secondary-e-hue, var(--secondary-hue, 90) ), saturation: var(--secondary-e-sat, var(--secondary-sat, 50%) ), lightness: var(--secondary-500-ltn, 70%) ),
+    secondary-f: ( hue: var(--secondary-f-hue, var(--secondary-hue, 110) ), saturation: var(--secondary-f-sat, var(--secondary-sat, 50%) ), lightness: var(--secondary-600-ltn, 70%) ),
+    secondary-g: ( hue: var(--secondary-g-hue, var(--secondary-hue, 130) ), saturation: var(--secondary-g-sat, var(--secondary-sat, 50%) ), lightness: var(--secondary-700-ltn, 70%) ),
+    secondary-h: ( hue: var(--secondary-h-hue, var(--secondary-hue, 150) ), saturation: var(--secondary-h-sat, var(--secondary-sat, 50%) ), lightness: var(--secondary-800-ltn, 70%) ),
+  ),
+
+  grayscale-colors: (
+    silver-100: ( hue: var(--silver-100-hue, var(--silver-hue, 230) ), saturation: var(--silver-100-sat, var(--silver-sat, 0%) ), lightness: var(--silver-100-ltn, 98%) ),
+    silver-200: ( hue: var(--silver-200-hue, var(--silver-hue, 230) ), saturation: var(--silver-200-sat, var(--silver-sat, 0%) ), lightness: var(--silver-200-ltn, 93%) ),
+    silver-300: ( hue: var(--silver-300-hue, var(--silver-hue, 230) ), saturation: var(--silver-300-sat, var(--silver-sat, 0%) ), lightness: var(--silver-300-ltn, 88%) ),
+    silver-400: ( hue: var(--silver-400-hue, var(--silver-hue, 230) ), saturation: var(--silver-400-sat, var(--silver-sat, 0%) ), lightness: var(--silver-400-ltn, 83%) ),
+    silver-500: ( hue: var(--silver-500-hue, var(--silver-hue, 230) ), saturation: var(--silver-500-sat, var(--silver-sat, 0%) ), lightness: var(--silver-500-ltn, 78%) ),
+    silver-600: ( hue: var(--silver-600-hue, var(--silver-hue, 230) ), saturation: var(--silver-600-sat, var(--silver-sat, 0%) ), lightness: var(--silver-600-ltn, 73%) ),
+    silver-700: ( hue: var(--silver-700-hue, var(--silver-hue, 230) ), saturation: var(--silver-700-sat, var(--silver-sat, 0%) ), lightness: var(--silver-700-ltn, 68%) ),
+    silver-800: ( hue: var(--silver-800-hue, var(--silver-hue, 230) ), saturation: var(--silver-800-sat, var(--silver-sat, 0%) ), lightness: var(--silver-800-ltn, 63%) ),
+    silver-900: ( hue: var(--silver-900-hue, var(--silver-hue, 230) ), saturation: var(--silver-900-sat, var(--silver-sat, 0%) ), lightness: var(--silver-900-ltn, 58%) ),
+
+    gray-100: ( hue: var(--gray-100-hue, var(--gray-hue, 230) ), saturation: var(--gray-100-sat, var(--gray-sat, 0%) ), lightness: var(--gray-100-ltn, 53%) ),
+    gray-200: ( hue: var(--gray-200-hue, var(--gray-hue, 230) ), saturation: var(--gray-200-sat, var(--gray-sat, 0%) ), lightness: var(--gray-200-ltn, 48%) ),
+    gray-300: ( hue: var(--gray-300-hue, var(--gray-hue, 230) ), saturation: var(--gray-300-sat, var(--gray-sat, 0%) ), lightness: var(--gray-300-ltn, 43%) ),
+    gray-400: ( hue: var(--gray-400-hue, var(--gray-hue, 230) ), saturation: var(--gray-400-sat, var(--gray-sat, 0%) ), lightness: var(--gray-400-ltn, 38%) ),
+    gray-500: ( hue: var(--gray-500-hue, var(--gray-hue, 230) ), saturation: var(--gray-500-sat, var(--gray-sat, 0%) ), lightness: var(--gray-500-ltn, 33%) ),
+    gray-600: ( hue: var(--gray-600-hue, var(--gray-hue, 230) ), saturation: var(--gray-600-sat, var(--gray-sat, 0%) ), lightness: var(--gray-600-ltn, 28%) ),
+    gray-700: ( hue: var(--gray-700-hue, var(--gray-hue, 230) ), saturation: var(--gray-700-sat, var(--gray-sat, 0%) ), lightness: var(--gray-700-ltn, 23%) ),
+    gray-800: ( hue: var(--gray-800-hue, var(--gray-hue, 230) ), saturation: var(--gray-800-sat, var(--gray-sat, 0%) ), lightness: var(--gray-800-ltn, 18%) ),
+    gray-900: ( hue: var(--gray-900-hue, var(--gray-hue, 230) ), saturation: var(--gray-900-sat, var(--gray-sat, 0%) ), lightness: var(--gray-900-ltn, 13%) ),
+  ),
+
+  system-colors: (
+    red: ( hue: var(--red-hue, 0), saturation: var(--red-sat, 50%), lightness: var(--red-ltn, 50%) ),
+    orange: ( hue: var(--orange-hue, 20), saturation: var(--orange-sat, 50%), lightness: var(--orange-ltn, 50%) ),
+    yellow: ( hue: var(--yellow-hue, 40), saturation: var(--yellow-sat, 50%), lightness: var(--yellow-ltn, 50%) ),
+    lemon: ( hue: var(--lemon-hue, 60), saturation: var(--lemon-sat, 50%), lightness: var(--lemon-ltn, 50%) ),
+    olive: ( hue: var(--olive-hue, 80), saturation: var(--olive-sat, 50%), lightness: var(--olive-ltn, 50%) ),
+    lime: ( hue: var(--lime-hue, 100), saturation: var(--lime-sat, 50%), lightness: var(--lime-ltn, 50%) ),
+    green: ( hue: var(--green-hue, 120), saturation: var(--green-sat, 50%), lightness: var(--green-ltn, 50%) ),
+    mint: ( hue: var(--mint-hue, 140), saturation: var(--mint-sat, 50%), lightness: var(--mint-ltn, 50%) ),
+    teal: ( hue: var(--teal-hue, 160), saturation: var(--teal-sat, 50%), lightness: var(--teal-ltn, 50%) ),
+    cyan: ( hue: var(--cyan-hue, 180), saturation: var(--cyan-sat, 50%), lightness: var(--cyan-ltn, 50%) ),
+    sky: ( hue: var(--sky-hue, 200), saturation: var(--sky-sat, 50%), lightness: var(--sky-ltn, 50%) ),
+    blue: ( hue: var(--blue-hue, 220), saturation: var(--blue-sat, 50%), lightness: var(--blue-ltn, 50%) ),
+    indigo: ( hue: var(--indigo-hue, 240), saturation: var(--indigo-sat, 50%), lightness: var(--indigo-ltn, 50%) ),
+    purple: ( hue: var(--purple-hue, 260), saturation: var(--purple-sat, 50%), lightness: var(--purple-ltn, 50%) ),
+    orchid: ( hue: var(--orchid-hue, 280), saturation: var(--orchid-sat, 50%), lightness: var(--orchid-ltn, 50%) ),
+    magenta: ( hue: var(--magenta-hue, 300), saturation: var(--magenta-sat, 50%), lightness: var(--magenta-ltn, 50%) ),
+    pink: ( hue: var(--pink-hue, 320), saturation: var(--pink-sat, 50%), lightness: var(--pink-ltn, 50%) ),
+    crimson: ( hue: var(--crimson-hue, 340), saturation: var(--crimson-sat, 50%), lightness: var(--crimson-ltn, 50%) ),
+  ),
+
+  temperature-colors: (
+    cold: ( hue: var(--cold-hue, 202), saturation: var(--cold-sat, 100%), lightness: var(--cold-ltn, 50%) ),
+    room: ( hue: var(--room-hue, 144), saturation: var(--room-sat, 100%), lightness: var(--room-ltn, 40%) ),
+    warm: ( hue: var(--warm-hue, 40), saturation: var(--warm-sat, 100%), lightness: var(--warm-ltn, 50%) ),
+    hot: ( hue: var(--hot-hue, 0), saturation: var(--hot-sat, 95%), lightness: var(--hot-ltn, 50%) ),
+  ),
+
+  monotone-colors: (
+    black: (hue: 0, saturation: 0%, lightness: 0%),
+    white: (hue: 0, saturation: 0%, lightness: 100%),
+    transparent: transparent,
+  ),
+
+  colors: (),
+
+  gradients: (
+    gradient: linear-gradient(var(--gradient)),
+    gradient-x-from-white: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%),
+    gradient-x-to-white: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%),
+    gradient-y-from-white: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%),
+    gradient-y-to-white: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%),
+    gradient-x-from-black: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%),
+    gradient-x-to-black: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%),
+    gradient-y-from-black: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%),
+    gradient-y-to-black: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%),
+  ),
+
+  range-limits: (
+    margin: 41,
+    padding: 41,
+    width: 41,
+    height: 41,
+    gap: 29,
+    gutter: 29,
+    border-width: 9,
+    split-width: 9,
+    top: 29,
+    right: 29,
+    bottom: 29,
+    left: 29,
+    translate: 29
+  ),
+
+  positive-sizes: (
+    0: 0,
+    1: 1px,
+    2: 2px,
+    3: 3px,
+    4: rem(4),
+    5: rem(5),
+    6: rem(6),
+    7: rem(7),
+    8: rem(8),
+    9: rem(9),
+    10: rem(10),
+    12: rem(12),
+    14: rem(14),
+    16: rem(16),
+    18: rem(18),
+    20: rem(20),
+    24: rem(24),
+    28: rem(28),
+    32: rem(32),
+    36: rem(36),
+    40: rem(40),
+    48: rem(48),
+    56: rem(56),
+    64: rem(64),
+    72: rem(72),
+    80: rem(80),
+    96: rem(96),
+    112: rem(112),
+    128: rem(128),
+    144: rem(144),
+    160: rem(160),
+    192: rem(192),
+    224: rem(224),
+    256: rem(256),
+    288: rem(288),
+    320: rem(320),
+    384: rem(384),
+    448: rem(448),
+    512: rem(512),
+    576: rem(576),
+    640: rem(640),
+  ),
+
+  negative-sizes: (
+    0: 0,
+    n1: -1px,
+    n2: -2px,
+    n3: -3px,
+    n4: rem(-4),
+    n5: rem(-5),
+    n6: rem(-6),
+    n7: rem(-7),
+    n8: rem(-8),
+    n9: rem(-9),
+    n10: rem(-10),
+    n12: rem(-12),
+    n14: rem(-14),
+    n16: rem(-16),
+    n18: rem(-18),
+    n20: rem(-20),
+    n24: rem(-24),
+    n28: rem(-28),
+    n32: rem(-32),
+    n36: rem(-36),
+    n40: rem(-40),
+    n48: rem(-48),
+    n56: rem(-56),
+    n64: rem(-64),
+    n72: rem(-72),
+    n80: rem(-80),
+    n96: rem(-96),
+    n112: rem(-112),
+    n128: rem(-128),
+    n144: rem(-144),
+    n160: rem(-160),
+    n192: rem(-192),
+    n224: rem(-224),
+    n256: rem(-256),
+    n288: rem(-288),
+    n320: rem(-320),
+    n384: rem(-384),
+    n448: rem(-448),
+    n512: rem(-512),
+    n576: rem(-576),
+    n640: rem(-640),
+  ),
+
+  font-families: (
+    sans: sans-serif,
+    serif: serif,
+    mono: monospace,
+  ),
+
+  font-sizes: (
+    10xl: rem(72),
+    9xl: rem(64),
+    8xl: rem(56),
+    7xl: rem(48),
+
+    6xl: rem(40),
+    5xl: rem(36),
+    4xl: rem(32),
+    3xl: rem(28),
+    2xl: rem(24),
+
+    xl: rem(20),
+    lg: rem(18),
+
+    base: rem(16),
+
+    md: rem(15),
+    sm: rem(14),
+    xs: rem(12),
+    2xs: rem(10),
+  ),
+
+  font-weights: (
+    ultralight: 100,
+    extralight: 200,
+    light: 300,
+    regular: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+    extrabold: 800,
+    ultrabold: 900,
+  ),
+
+  leadings: (
+    tightest: 1,
+    tighter: 1.25,
+    tight: 1.5,
+    base: 1.75,
+    loose: 2,
+    looser: 2.25,
+    loosest: 2.5,
+
+    0: 1,
+    1: 1.1,
+    2: 1.2,
+    3: 1.3,
+    4: 1.4,
+    5: 1.5,
+    6: 1.6,
+    7: 1.7,
+    8: 1.8,
+    9: 1.9
+  ),
+
+  trackings: (
+    tightest: -0.75em,
+    tighter: -0.05em,
+    tight: -0.025em,
+    base: 0,
+    loose: 0.025em,
+    looser: 0.05em,
+    loosest: 0.075em,
+
+    n9: -0.09em,
+    n8: -0.08em,
+    n7: -0.07em,
+    n6: -0.06em,
+    n5: -0.05em,
+    n4: -0.04em,
+    n3: -0.03em,
+    n2: -0.02em,
+    n1: -0.01em,
+    0: 0,
+    1: 0.01em,
+    2: 0.02em,
+    3: 0.03em,
+    4: 0.04em,
+    5: 0.05em,
+    6: 0.06em,
+    7: 0.07em,
+    8: 0.08em,
+    9: 0.09em,
+  ),
+
+  radiuses: (
+    2xs: rem(2),
+    xs: rem(4),
+    sm: rem(6),
+    md: rem(8),
+    lg: rem(10),
+    xl: rem(12),
+    2xl: rem(14),
+    round: 9999px,
+  ),
+
+  shadows: (
+    xs: (
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.24),
+    ),
+    sm: (
+      0 3px 6px rgba(0, 0, 0, 0.16),
+      0 3px 6px rgba(0, 0, 0, 0.23),
+    ),
+    md: (
+      0 10px 20px rgba(0, 0, 0, 0.19),
+      0 6px 6px rgba(0, 0, 0, 0.23),
+    ),
+    lg: (
+      0 14px 28px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22),
+    ),
+    xl: (
+      0 19px 38px rgba(0, 0, 0, 0.3),
+      0 15px 12px rgba(0, 0, 0, 0.22),
+    ),
+    focus: (
+      0 0 0 3px rgb(63 96 191 / 20%)
+    ),
+    focus-success: (
+      0 0 0 3px rgb(103 204 51 / 20%)
+    ),
+    focus-warning: (
+      0 0 0 3px rgb(242 166 13 / 20%)
+    ),
+    focus-danger: (
+      0 0 0 3px rgb(221 61 60 / 20%)
+    )
+  ),
+
+  keyframes: (
+    spin: (
+      from: (
+        transform: rotate(0deg)
+      ),
+      to: (
+        transform: rotate(360deg)
+      )
+    ),
+    ping: (
+      0%: (
+        transform: scale(1),
+        opacity: 1,
+      ),
+      80%: (
+        transform: scale(2.25),
+        opacity: 0,
+      ),
+      100%: (
+        transform: scale(2.25),
+        opacity: 0,
+      )
+    ),
+    bounce: (
+      0%: (
+        transform: translateY(-25%),
+        animation-timing-function: cubic-bezier(.8,0,1,1)
+      ),
+      50%: (
+        transform: none,
+        animation-timing-function: cubic-bezier(0,0,.2,1)
+      ),
+      100%: (
+        transform: translateY(-25%),
+        animation-timing-function: cubic-bezier(.8,0,1,1)
+      )
+    ),
+    pulse: (
+      0%: (
+        opacity: 1,
+      ),
+      50%: (
+        opacity: .5,
+      ),
+      100%: (
+        opacity: 1,
+      )
+    )
+  )
+) !default;
+
+
+// CONFIG COMPILER
+// ============================================================
+
+$all-config: map.deep-merge($default-config, $config);
+
+
+// FETCHED VARIABLES
+// ============================================================
+
+$important: map.get($all-config, important);
+$prefix: map.get($all-config, prefix);
+$delimiter: map.get($all-config, delimiter);
+$child-delimiter: map.get($all-config, child-delimiter);
+$pseudo-delimiter: escape(map.get($all-config, pseudo-delimiter));
+$screen-delimiter: escape(map.get($all-config, screen-delimiter));
+
+$headless: map.get($all-config, headless);
+$root: map.get($all-config, root);
+$debugger: map.get($all-config, debugger);
+$dark-mode: map.get($all-config, dark-mode);
+
+$screens: map.get($all-config, screens);
+
+$range-limits: map.get($all-config, range-limits);
+$positive-sizes: map.get($all-config, positive-sizes);
+$negative-sizes: map.get($all-config, negative-sizes);
+
+$shadows: map.get($all-config, shadows);
+
+$font-families: map.get($all-config, font-families);
+$font-sizes: map.get($all-config, font-sizes);
+$font-weights: map.get($all-config, font-weights);
+$leadings: map.get($all-config, leadings);
+$trackings: map.get($all-config, trackings);
+$radiuses: map.get($all-config, radiuses);
+
+$brighten-levels: map.get($all-config, brighten-levels);
+$deepen-levels: map.get($all-config, deepen-levels);
+$lighten-levels: map.get($all-config, lighten-levels);
+$darken-levels: map.get($all-config, darken-levels);
+$opacity-levels: map.get($all-config, opacity-levels);
+
+$primary-colors: map.get($all-config, primary-colors);
+$secondary-colors: map.get($all-config, secondary-colors);
+$temperature-colors: map.get($all-config, temperature-colors);
+$system-colors: map.get($all-config, system-colors);
+$grayscale-colors: map.get($all-config, grayscale-colors);
+$monotone-colors: map.get($all-config, monotone-colors);
+
+$colors: map.get($all-config, colors);
+$gradients: map.get($all-config, gradients);
+
+
+// PRIVATE FUNCTIONS
+// ============================================================
+
+// MULTIPLE MAP MERGE FUNCTION
+@function merge($maps...) {
+  $collection: () !default;
+  @each $map in $maps {
+    $collection: map.merge($collection, $map);
+  }
+  @return $collection;
+}
+
+// VARIABLIZE MAP FUNCTION (CSS CUSTOM PROPERTIES)
+@function variablize-map($map, $shorthand) {
+  $variablized-map: ();
+  @each $key, $value in $map {
+    $delimiter: if($shorthand == null, null, '-');
+    $map: (
+      $key: var(--#{$shorthand}#{$delimiter}#{$key}),
+    );
+    $variablized-map: map.merge($variablized-map, $map);
+  }
+
+  @return $variablized-map;
+}
+
+// GENERATE SCREENS MAP
+@function name-screens() {
+  $named-screens: ();
+  @each $key, $value in $screens {
+    $screens: (
+      screen-#{$key}: $value,
+    );
+    $named-screens: map.merge($named-screens, $screens);
+  }
+  @return $named-screens;
+}
+
+
+// MERGED VARIABLES
+// ============================================================
+
+
+$merged-colors: ();
+@if ($primary-colors != null) {
+  $merged-colors: map.deep-merge($merged-colors, $primary-colors);
+}
+@if ($secondary-colors != null) {
+  $merged-colors: map.deep-merge($merged-colors, $secondary-colors);
+}
+@if ($temperature-colors != null) {
+  $merged-colors: map.deep-merge($merged-colors, $temperature-colors);
+}
+@if ($system-colors != null) {
+  $merged-colors: map.deep-merge($merged-colors, $system-colors);
+}
+@if ($grayscale-colors != null) {
+  $merged-colors: map.deep-merge($merged-colors, $grayscale-colors);
+}
+@if ($monotone-colors != null) {
+  $merged-colors: map.deep-merge($merged-colors, $monotone-colors);
+}
+@if ($colors != null) {
+  $merged-colors: map.deep-merge($merged-colors, $colors);
+}
+
+$merged-saturations: ();
+@if ($brighten-levels != null) {
+  $merged-saturations: map.deep-merge($merged-saturations, $brighten-levels);
+}
+@if ($deepen-levels != null) {
+  $merged-saturations: map.deep-merge($merged-saturations, $deepen-levels);
+}
+
+$merged-lightnesses: ();
+@if ($lighten-levels != null) {
+  $merged-lightnesses: map.deep-merge($merged-lightnesses, $lighten-levels);
+}
+@if ($darken-levels != null) {
+  $merged-lightnesses: map.deep-merge($merged-lightnesses, $darken-levels);
+}
+
+$merged-sizes: map.deep-merge($positive-sizes, $negative-sizes);
+
+
+
+// VARIABLIZED VARIABLES
+// ============================================================
+
+$var-radiuses: variablize-map($radiuses, radius);
+$var-shadows: variablize-map($shadows, shadow);
+
+$var-font-families: variablize-map($font-families, font);
+$var-font-sizes: variablize-map($font-sizes, font);
+$var-font-weights: variablize-map($font-weights, font);
+$var-leadings: variablize-map($leadings, leading);
+$var-trackings: variablize-map($trackings, tracking);
+
+
+
+// HELPER FUNCTIONS
+// ============================================================
+
+// SCREEN FUNCTIONS
+@function screen($screen) {
+  $result: ();
+  @if (map.get($all-config, screens, $screen)) {
+    $result: map.get($all-config, screens, $screen);
+  }
+  @return $result;
+}
+
+@function screens() {
+  $result: $screens;
+  @return $result;
+}
+
+// COLOR FUNCTIONS
+@function gradient($gradient) {
+  @if (map.get($gradients, $gradient)) {
+    $result: ();
+    $result: map.get($gradients, $gradient);
+    @return $result;
+  } @else {
+    @error "[#{$gradient}] does not exist";
+  }
+}
+
+@function gradients() {
+  $map: ();
+  @if ($gradients == null) {
+    @return $map;
+  } @else {
+    @return $gradients;
+  }  
+}
+
+@function brighten-levels() {
+  @return $brighten-levels;
+}
+
+@function var-brighten-levels() {
+  $result: ();
+  @each $key, $value in brighten-levels() {
+    $map: (
+      $key: var(--#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}
+
+@function deepen-levels() {
+  @return $deepen-levels;
+}
+
+@function var-deepen-levels() {
+  $result: ();
+  @each $key, $value in deepen-levels() {
+    $map: (
+      $key: var(--#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}
+
+@function lighten-levels() {
+  @return $lighten-levels;
+}
+
+@function var-lighten-levels() {
+  $result: ();
+  @each $key, $value in lighten-levels() {
+    $map: (
+      $key: var(--#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}
+
+@function darken-levels() {
+  @return $darken-levels;
+}
+
+@function var-darken-levels() {
+  $result: ();
+  @each $key, $value in darken-levels() {
+    $map: (
+      $key: var(--#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}
+
+@function opacity-levels() {
+  @return $opacity-levels;
+}
+
+@function var-brighten-levels() {
+  $result: ();
+  @each $key, $value in brighten-levels() {
+    $map: (
+      $key: var(--#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}
+
+@function bg-colors() {
+  $result: ();
+  @each $key, $value in $merged-colors {
+    @if (meta.type-of($value) == map) {
+      
+      $hue: map.get($value, hue);
+      $saturation: map.get($value, saturation);
+      $lightness: map.get($value, lightness);
+
+      $map: (
+        $key: hsla( #{$hue}, calc(#{$saturation} + var(--bg-sat)), calc(#{$lightness} + var(--bg-ltn)), var(--bg-opacity) )
+      );
+      $result: map.deep-merge($result, $map);
+    } @else {
+
+      $map: (
+        $key: $value
+      );
+      $result: map.deep-merge($result, $map);
+    }
+  }
+  @return $result;
+}
+
+@function text-colors() {
+  $result: ();
+  @each $key, $value in $merged-colors {
+    @if (meta.type-of($value) == map) {
+      $hue: map.get($value, hue);
+      $saturation: map.get($value, saturation);
+      $lightness: map.get($value, lightness);
+
+      $map: (
+        $key: hsla( #{$hue}, calc(#{$saturation} + var(--text-sat)), calc(#{$lightness} + var(--text-ltn)), var(--text-opacity) )
+      );
+      $result: map.deep-merge($result, $map);
+    } @else {
+      $map: (
+        $key: $value
+      );
+      $result: map.deep-merge($result, $map);
+    }
+  }
+  @return $result;
+}
+
+@function border-colors() {
+  $result: ();
+  @each $key, $value in $merged-colors {
+    @if (meta.type-of($value) == map) {
+      $hue: map.get($value, hue);
+      $saturation: map.get($value, saturation);
+      $lightness: map.get($value, lightness);
+
+      $map: (
+        $key: hsla( #{$hue}, calc(#{$saturation} + var(--border-sat)), calc(#{$lightness} + var(--border-ltn)), var(--border-opacity) )
+      );
+      $result: map.deep-merge($result, $map);
+    } @else {
+      $map: (
+        $key: $value
+      );
+      $result: map.deep-merge($result, $map);
+    }
+  }
+  @return $result;
+}
+
+@function split-colors() {
+  $result: ();
+  @each $key, $value in $merged-colors {
+    @if (meta.type-of($value) == map) {
+      $hue: map.get($value, hue);
+      $saturation: map.get($value, saturation);
+      $lightness: map.get($value, lightness);
+
+      $map: (
+        $key: hsla( #{$hue}, calc(#{$saturation} + var(--split-sat)), calc(#{$lightness} + var(--split-ltn)), var(--split-opacity) )
+      );
+      $result: map.deep-merge($result, $map);
+    } @else {
+      $map: (
+        $key: $value
+      );
+      $result: map.deep-merge($result, $map);
+    }
+  }
+  @return $result;
+}
+
+@function fill($key, $param-sat: base, $param-ltn: base, $param-opacity: opacity-100) {
+
+  $result: null;
+
+  @if (map.has-key($merged-colors, $key)) {
+    $extracted-color: map.get($merged-colors, $key);
+
+    @if (meta.type-of($extracted-color) == map) {
+      $hue: map.get($extracted-color, hue);
+  
+      $base-saturation: null;
+      $base-lightness: null;
+  
+      $saturation: null;
+      $lightness: null;
+
+      $opacity: map.get($opacity-levels, $param-opacity);
+      
+      @if ($param-sat == base) {
+        $base-saturation: 0%;
+        $saturation: map.get($extracted-color, saturation);
+      } @else if (map.has-key($merged-saturations, $param-sat)) {
+        $base-saturation: map.get($extracted-color, saturation);
+        $saturation: map.get($merged-saturations, $param-sat);
+      } @else {
+        @error "[#{$param-sat}] saturation does not exist.";
+      }
+      
+      @if ($param-ltn == base) {
+        $base-lightness: 0%;
+        $lightness: map.get($extracted-color, lightness);
+      } @else if (map.has-key($merged-lightnesses, $param-ltn)) {
+        $base-lightness: map.get($extracted-color, lightness);
+        $lightness: map.get($merged-lightnesses, $param-ltn);
+      } @else {
+        @error "[#{$param-ltn}] lightness does not exist.";
+      }
+  
+      $result: hsla( #{$hue}, calc(#{$base-saturation} + #{$saturation}), calc(#{$base-lightness} + #{$lightness}), #{$opacity});
+  
+    } @else {
+      $map: (
+        $key: $value
+      );
+      $result: map.deep-merge($result, $map);
+    }
+  } @else {
+    @error "[#{$key}] does not exist.";
+  }
+
+  @return $result;
+}
+
+// RADIUS FUNCTIONS
+@function radius($radius) {
+  @if (map.get($radiuses, $radius)) {
+    $result: ();
+    $result: map.get($var-radiuses, $radius);
+    @return $result;
+  } @else {
+    @error "[#{$radius}] does not exist";
+  }
+}
+
+@function radiuses() {
+  @return $var-radiuses;
+}
+
+// SHADOW FUNCTIONS
+@function shadow($shadow) {
+  @if (map.get($shadows, $shadow)) {
+    $result: ();
+    $result: map.get($var-shadows, $shadow);
+    @return $result;
+  } @else {
+    @error "[#{$shadow}] does not exist";
+  }
+}
+
+@function shadows() {
+  @return $var-shadows;
+}
+
+// SIZE FUNCTIONS
+@function positive-sizes($limit: null) {
+  @if ($limit != null) {
+    $size-map: ();
+
+    @for $i from 1 through $limit {
+      $map: list.nth($positive-sizes, $i);
+      $key: list.nth($map, 1);
+      $value: list.nth($map, 2);
+      $limit-map: (
+        $key: $value
+      );
+      $size-map: map.merge($size-map, $limit-map);
+    }
+
+    @return $size-map;
+  } @else {
+    @return $positive-sizes;
+  }
+}
+
+@function negative-sizes($limit: null) {
+  @if ($limit != null) {
+    $size-map: ();
+
+    @for $i from 1 through $limit {
+      $map: list.nth($negative-sizes, $i);
+      $key: list.nth($map, 1);
+      $value: list.nth($map, 2);
+      $limit-map: (
+        $key: $value
+      );
+      $size-map: map.merge($size-map, $limit-map);
+    }
+
+    @return $size-map;
+  } @else {
+    @return $negative-sizes;
+  }
+}
+
+@function size($size, $sizes...) {
+  $result: ();
+  @if (map.has-key($merged-sizes, $size)) {
+    $result: map.get($merged-sizes, $size);
+  } @else {
+    @error "[#{$size}] does not exist";
+  }
+  @each $size in $sizes {
+    $value: '';
+    @if (map.has-key($merged-sizes, $size)) {
+      $value: map.get($merged-sizes, $size);
+      $result: list.append($result, $value);
+    } @else {
+      $result: list.append($result, $size);
+    }
+  }
+  @return $result;
+}
+
+@function sizes($limit: null) {
+  @if ($limit != null) {
+    $positive-sizes: positive-sizes($limit);
+    $negative-sizes: negative-sizes($limit);
+    $size-map: map.merge($positive-sizes, $negative-sizes);
+    @return $size-map;
+  } @else {
+    @return $merged-sizes;
+  }
+}
+
+// TYPOGRAPHY FUNCTIONS
+@function font-family($font-family) {
+  @if (map.get($font-families, $font-family)) {
+    $result: ();
+    $result: map.get($var-font-families, $font-family);
+    @return $result;
+  } @else {
+    @error "[#{$font-family}] does not exist";
+  }
+}
+
+@function font-families() {
+  @return $var-font-families;
+}
+
+@function font-size($font-size) {
+  @if (map.get($font-sizes, $font-size)) {
+    $result: ();
+    $result: map.get($var-font-sizes, $font-size);
+    @return $result;
+  } @else {
+    @error "[#{$font-size}] does not exist";
+  }
+}
+
+@function font-sizes() {
+  @return $var-font-sizes;
+}
+
+@function font-weight($font-weight) {
+  @if (map.get($font-weights, $font-weight)) {
+    $result: ();
+    $result: map.get($var-font-weights, $font-weight);
+    @return $result;
+  } @else {
+    @error "[#{$font-weight}] does not exist";
+  }
+}
+
+@function font-weights() {
+  @return $var-font-weights;
+}
+
+@function leading($leading) {
+  @if (map.get($leadings, $leading)) {
+    $result: ();
+    $result: map.get($var-leadings, $leading);
+    @return $result;
+  } @else {
+    @error "[#{$leading}] does not exist";
+  }
+}
+
+@function leadings() {
+  @return $var-leadings;
+}
+
+@function tracking($tracking) {
+  @if (map.get($trackings, $tracking)) {
+    $result: ();
+    $result: map.get($var-trackings, $tracking);
+    @return $result;
+  } @else {
+    @error "[#{$tracking}] does not exist";
+  }
+}
+
+@function trackings() {
+  @return $var-trackings;
+}
+
+// HELPER MIXINS
+// ============================================================
+
+@mixin screen($screen) {
+  @media (min-width: screen($screen)) {
+    @content; 
+  }
+}
+
+@mixin apply($utilities...) {
+  @each $utility in $utilities {
+    $escaped-utility: escape($utility);
+    @extend %#{$escaped-utility};
+  }
+}
+
+// ROOT VARIABLES
+// ============================================================
+
+// Create root variables if CSS custom property setting is enabled
+:root {
+  --FONT-FAMILIES-----------------:01;
+  @each $key, $value in $font-families {
+    --font-#{'' + $key}: #{$value};
+  }
+  --FONT-SIZES--------------------:02;
+  @each $key, $value in $font-sizes {
+    --font-#{'' + $key}: #{$value};
+  }
+  --FONT-WEIGHTS------------------:02;
+  @each $key, $value in $font-weights {
+    --font-#{'' + $key}: #{$value};
+  }
+  --LEADING-----------------------:03;
+  @each $key, $value in $leadings {
+    --leading-#{'' + $key}: #{$value};
+  }
+  --TRACKING----------------------:04;
+  @each $key, $value in $trackings {
+    --tracking-#{'' + $key}: #{$value};
+  }
+  --RADIUS------------------------:05;
+  @each $key, $value in $radiuses {
+    --radius-#{'' + $key}: #{$value};
+  }
+  --SHADOWS-----------------------:06;
+  @each $key, $value in $shadows {
+    --shadow-#{'' + $key}: #{$value};
+  }
+  --BRIGHTEN-LEVELS---------------:07;
+  @each $key, $value in $brighten-levels {
+    --#{'' + $key}: #{$value};
+  }
+  --DEEPEN-LEVELS-----------------:08;
+  @each $key, $value in $deepen-levels {
+    --#{'' + $key}: #{$value};
+  }
+  --LIGHTEN-LEVELS----------------:09;
+  @each $key, $value in $lighten-levels {
+    --#{'' + $key}: #{$value};
+  }
+  --DARKEN-LEVELS-----------------:10;
+  @each $key, $value in $darken-levels {
+    --#{'' + $key}: #{$value};
+  }
+}
