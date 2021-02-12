@@ -49,4 +49,4 @@ For general questions and conversations please use Twitter!
 
 ## License
 
-Copyright 2020 Jin Su Park. Code released under [the MIT license](https://github.com/ThinkUniform/UniformCSS/LICENSE).
+Copyright 2020 UniformCSS. Code released under [the MIT license](https://github.com/ThinkUniform/UniformCSS/LICENSE).
