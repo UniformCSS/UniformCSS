@@ -19,13 +19,13 @@
 npm install uniformcss
 ```
 
-**Step 2. Add Uniform** - Simply drag-and-drop the uniform folder to your sass directory and add this one liner to your stylesheet.
+**Step 2. Add Uniform** - Simply drag-and-drop the uniform folder to your sass directory and add this one line to your Sass stylesheet.
 
 ```scss
 @use "uniform" as *;
 ```
 
-**Step 3. Build everything** - Compile your sass and just like that, you now have access to all the utility classes. It's that simple.
+**Step 3. Build everything** - Compile your sass, you now have access to all the utility classes. It's that simple.
 
 ```html
 <div class="flex w-640 py-48 mx-auto radius-md bg-black text-white">
@@ -35,7 +35,11 @@ npm install uniformcss
 
 ## Documentation
 
-For full documentation, please visit [uniformcss.com](https://uniformcss.com/).
+To learn more about customization options and get access to the full documentation, please visit [uniformcss.com](https://uniformcss.com/).
+
+### Playground
+
+To try out UniformCSS on codepen, please visit [playground](https://codepen.io/ThinkUniform/pen/poNNqaE).
 
 ## Community
 
