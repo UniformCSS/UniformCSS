@@ -62,10 +62,8 @@
 
 
 // UTILITIES - SPLIT (10)
-@use "utilities/split/extension-split-brighten";
-@use "utilities/split/extension-split-deepen";
-@use "utilities/split/extension-split-lighten";
-@use "utilities/split/extension-split-darken";
+@use "utilities/split/extension-split-tint";
+@use "utilities/split/extension-split-shade";
 @use "utilities/split/extension-split-opacity";
 @use "utilities/split/extension-split-color";
 @use "utilities/split/extension-split-reverse";
@@ -151,10 +149,8 @@
 
 
 // UTILITIES - BORDER (17)
-@use "utilities/border/extension-border-brighten";
-@use "utilities/border/extension-border-deepen";
-@use "utilities/border/extension-border-lighten";
-@use "utilities/border/extension-border-darken";
+@use "utilities/border/extension-border-tint";
+@use "utilities/border/extension-border-shade";
 @use "utilities/border/extension-border-opacity";
 @use "utilities/border/extension-border-bottom-radius";
 @use "utilities/border/extension-border-left-radius";
@@ -176,10 +172,8 @@
 
 
 // UTILITIES - BACKGROUND (7)
-@use "utilities/background/extension-background-brighten";
-@use "utilities/background/extension-background-deepen";
-@use "utilities/background/extension-background-lighten";
-@use "utilities/background/extension-background-darken";
+@use "utilities/background/extension-background-tint";
+@use "utilities/background/extension-background-shade";
 @use "utilities/background/extension-background-opacity";
 @use "utilities/background/core-background-attachment";
 @use "utilities/background/core-background-clip";
@@ -231,11 +225,9 @@
 
 
 // UTILITIES - TYPOGRAPHY (14)
-@use "utilities/typography/extension-text-brighten";
-@use "utilities/typography/extension-text-deepen";
-@use "utilities/typography/extension-text-lighten";
-@use "utilities/typography/extension-text-darken";
-@use "utilities/typography/extension-text-opacity";
+@use "utilities/typography/extension-color-tint";
+@use "utilities/typography/extension-color-shade";
+@use "utilities/typography/extension-color-opacity";
 @use "utilities/typography/core-color";
 @use "utilities/typography/core-font-family";
 @use "utilities/typography/core-font-size";
@@ -250,6 +242,13 @@
 @use "utilities/typography/core-text-transform";
 @use "utilities/typography/core-white-space";
 @use "utilities/typography/core-word-break";
+
+
+// UTILITIES - PLACEHOLDER (6)
+@use "utilities/placeholder/extension-placeholder-tint";
+@use "utilities/placeholder/extension-placeholder-shade";
+@use "utilities/placeholder/extension-placeholder-opacity";
+@use "utilities/placeholder/core-placeholder-color";
 
 
 // UTILITIES - APPEARANCE (6)
@@ -276,7 +275,6 @@ $config: map.deep-merge(core.$all-config, core.$config);
 
   $headless: map.get($config, headless);
   $placeholders: map.get($config, placeholders);
-  $god-mode: map.get($config, god-mode);
   $dark-mode: map.get($config, dark-mode);
 
   $utilities: map.get($config, utility);
@@ -293,15 +291,8 @@ $config: map.deep-merge(core.$all-config, core.$config);
     // loop through utilities
     @each $utility, $utility-value in $utilities {
       $shorthand: map.get($utility-value, shorthand);
-      $responsive: null;
-      $responsive-pseudos: null;
-      @if ($god-mode == true) {
-        $responsive: true;
-        $responsive-pseudos: true;
-      } @else {
-        $responsive: map.get($utility-value, responsive);
-        $responsive-pseudos: map.get($utility-value, responsive-pseudos);
-      }
+      $responsive: map.get($utility-value, responsive);
+      $responsive-pseudos: map.get($utility-value, responsive-pseudos);
       $extra-selector: map.get($utility-value, extra-selector);
       
       $properties: map.get($utility-value, properties);
@@ -321,17 +312,12 @@ $config: map.deep-merge(core.$all-config, core.$config);
       $pseudos: map.get($utility-value, pseudos);
       $pseudo-extends: map.get($utility-value, extends, pseudos);
       $merged-pseudos: ();
-      @if ($god-mode == true) {
-        $merged-pseudos: (first, last, first-type, last-type, odd, even, hover, active, visited, focus, disabled, empty, focus-within, group-hover, group-focus, dark);
-      } @else {
-        @if (list.index($pseudos, null) == null) {
-          $merged-pseudos: list.join($merged-pseudos, $pseudos);
-        }
-        @if (list.index($pseudo-extends, null) == null) {
-          $merged-pseudos: list.join($merged-pseudos, $pseudo-extends, $separator: comma);
-        }
+      @if (list.index($pseudos, null) == null) {
+        $merged-pseudos: list.join($merged-pseudos, $pseudos);
       }
-      
+      @if (list.index($pseudo-extends, null) == null) {
+        $merged-pseudos: list.join($merged-pseudos, $pseudo-extends, $separator: comma);
+      }
       
       // check if utility exists in the exclude list
       @if (list.index($exclude, all) == null and list.index($exclude, $utility) == null) {
@@ -526,13 +512,6 @@ $config: map.deep-merge(core.$all-config, core.$config);
           $shorthand: map.get($utility-value, shorthand);
           $responsive: map.get($utility-value, responsive);
           $responsive-pseudos: map.get($utility-value, responsive-pseudos);
-          @if ($god-mode == true) {
-            $responsive: true;
-            $responsive-pseudos: true;
-          } @else {
-            $responsive: map.get($utility-value, responsive);
-            $responsive-pseudos: map.get($utility-value, responsive-pseudos);
-          }
           $extra-selector: map.get($utility-value, extra-selector);
 
           $properties: map.get($utility-value, properties);
@@ -552,17 +531,12 @@ $config: map.deep-merge(core.$all-config, core.$config);
           $pseudos: map.get($utility-value, pseudos);
           $pseudo-extends: map.get($utility-value, extends, pseudos);
           $merged-pseudos: ();
-          @if ($god-mode == true) {
-            $merged-pseudos: (first, last, first-type, last-type, odd, even, hover, active, visited, focus, disabled, empty, focus-within, group-hover, group-focus, dark);
-          } @else {
-            @if (list.index($pseudos, null) == null) {
-              $merged-pseudos: list.join($merged-pseudos, $pseudos);
-            }
-            @if (list.index($pseudo-extends, null) == null) {
-              $merged-pseudos: list.join($merged-pseudos, $pseudo-extends, $separator: comma);
-            }
+          @if (list.index($pseudos, null) == null) {
+            $merged-pseudos: list.join($merged-pseudos, $pseudos);
           }
-
+          @if (list.index($pseudo-extends, null) == null) {
+            $merged-pseudos: list.join($merged-pseudos, $pseudo-extends, $separator: comma);
+          }
 
           // check if utility exists in the exclude list
           @if (list.index($exclude, all) == null and list.index($exclude, $utility) == null) {

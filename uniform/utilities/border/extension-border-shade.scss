@@ -1,7 +1,7 @@
 @use "uniform/core";
 @use "sass:map";
 
-$name: border-lightness;
+$name: border-shade;
 $shorthand: border;
 $responsive: false;
 $responsive-pseudos: false;
@@ -12,11 +12,11 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-lighten-levels(),
+    core.var-shade-levels(),
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

@@ -11,7 +11,9 @@ $properties: (font-size);
 $custom-properties: ();
 
 $variants: (
-  core.font-sizes()
+  core.merge(
+    core.font-sizes()
+  )
 );
 
 $pseudos: ();

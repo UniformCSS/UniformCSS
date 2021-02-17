@@ -9,8 +9,7 @@ $extra-selector: null;
 
 $properties: (background-color);
 $custom-properties: (
-  --bg-sat: 0%,
-  --bg-ltn: 0%,
+  --bg-ltn: 50%,
   --bg-opacity: 1,
 );
 
@@ -20,7 +19,7 @@ $variants: (
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

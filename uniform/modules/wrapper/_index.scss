@@ -25,16 +25,19 @@ $include: map.get($all-config, include);
     padding-left: var(--wrapper-padding, size(20));
     padding-right: var(--wrapper-padding, size(20));
     @include screen(md) {
-      padding: 0;
-      max-width: var(--wrapper-sm-max-width, 1024px);
+      padding-left: var(--wrapper-sm-padding, size(20));
+      padding-right: var(--wrapper-sm-padding, size(20));
+      max-width: var(--wrapper-sm-max-width, 1064px);
     }
     @include screen(lg) {
-      padding: 0;
-      max-width: var(--wrapper-md-max-width, 1140px);
+      padding-left: var(--wrapper-md-padding, size(20));
+      padding-right: var(--wrapper-md-padding, size(20));
+      max-width: var(--wrapper-md-max-width, 1180px);
     }
     @include screen(xl) {
-      padding: 0;
-      max-width: var(--wrapper-lg-max-width, 1280px);
+      padding-left: var(--wrapper-lg-padding, size(20));
+      padding-right: var(--wrapper-lg-padding, size(20));
+      max-width: var(--wrapper-lg-max-width, 1320px);
     }
   }
 }

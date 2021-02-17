@@ -9,8 +9,7 @@ $extra-selector: '> * + *';
 
 $properties: (border-color);
 $custom-properties: (
-  --split-sat: 0%,
-  --split-ltn: 0%,
+  --split-ltn: 50%,
   --split-opacity: 1,
 );
 

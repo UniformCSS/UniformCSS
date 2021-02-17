@@ -20,8 +20,8 @@ $include: map.get($all-config, include);
 
   .label {
     display: inline-block;
-    font-size: var(--label-font-size, font-size(xs));
-    font-weight: var(--label-font-weight, 600);
+    font-size: var(--label-font-size, var(--font-xs));
+    font-weight: var(--label-font-weight, var(--font-bold));
     color: var(--label-color, black);
     letter-spacing: var(--label-tracking, 0);
     text-transform: var(--label-text-transform, none);
@@ -32,7 +32,7 @@ $include: map.get($all-config, include);
         display: inline-block;
         top: -2px;
         left: 2px;
-        color: var(--label-required-color, fill(red));
+        color: var(--label-required-color, hsl( var(--red-hue), var(--red-sat), 50% ));
       }
     }
   }
@@ -47,6 +47,7 @@ $include: map.get($all-config, include);
   --input-border
   --input-radius
   --input-shadow
+  --input-font-size
   --input-transition
 
   --input-hover-border
@@ -86,113 +87,115 @@ $include: map.get($all-config, include);
   ******************************/
 
   .input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     outline: 0;
     position: relative;
     width: 100%;
-    height: var(--input-height, size(40));
-    padding: var(--input-padding, size(0, 14));
+    height: var(--input-height, var(--size-40));
+    padding: var(--input-padding, var(--size-0) var(--size-14));
     background: var(--input-bg, white);
-    border: var(--input-border, 1px solid fill(silver-300));
-    border-radius: var(--input-radius, radius(xs));
+    border: var(--input-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-500) ));
+    border-radius: var(--input-radius, var(--radius-xs));
     box-shadow: var(--input-shadow, none);
+    font-size: var(--input-font-size, var(--font-base));
     line-height: normal;
     transition: var(--input-transition, background-color 100ms, border-color 100ms, color 100ms, fill 100ms, stroke 100ms, opacity 100ms, box-shadow 100ms, transform  100ms);
 
     // PSEUDOS
     &:hover {
-      border: var(--input-hover-border, 1px solid fill(silver-500));
+      border: var(--input-hover-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
       box-shadow: var(--input-hover-shadow, none);
     }
     &:focus {
-      border: var(--input-focus-border, 1px solid fill(silver-500));
+      border: var(--input-focus-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
       box-shadow: var(--input-focus-shadow, shadow(focus));
     }
     &:disabled {
-      border: var(--input-disabled-border, 1px solid fill(silver-400));
-      background: var(--input-disabled-bg, fill(silver-300));
-      color: var(--input-disabled-color, fill(gray-400));
+      border: var(--input-disabled-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
+      background: var(--input-disabled-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-800) ));
+      color: var(--input-disabled-color, hsl( var(--gray-hue), var(--gray-sat), var(--shade-400) ));
       pointer-events: none;
     }
 
     // STATES
     &.is-success {
-      border: var(--input-success-border, 1px solid fill(lime, brighten-2));
+      border: var(--input-success-border, 1px solid hsl( var(--green-hue), var(--green-sat), var(--shade-100) ));
       &:focus {
-        box-shadow: var(--input-focus-success-shadow, shadow(focus-success));
+        box-shadow: var(--input-focus-success-shadow, var(--shadow-focus-success));
       }
     }
     &.is-warning {
-      border: var(--input-warning-border, 1px solid fill(yellow, brighten-8));
+      border: var(--input-warning-border, 1px solid hsl( var(--yellow-hue), var(--yellow-sat), 50% ));
       &:focus {
-        box-shadow: var(--input-focus-warning-shadow, shadow(focus-warning));
+        box-shadow: var(--input-focus-warning-shadow, var(--shadow-focus-warning));
       }
     }
     &.is-danger {
-      border: var(--input-danger-border, 1px solid fill(red, brighten-4, lighten-1));
+      border: var(--input-danger-border, 1px solid hsl( var(--red-hue), var(--red-sat), 50% ));
       &:focus {
-        box-shadow: var(--input-focus-danger-shadow, shadow(focus-danger));
+        box-shadow: var(--input-focus-danger-shadow, var(--shadow-focus-danger));
       }
     }
   }
 
   // SIZES	
   .input-xs {
-    height: var(--input-xs-height, size(24));
-    padding: var(--input-xs-padding, size(0, 8));
-    font-size: var(--input-xs-font-size, font-size(xs));
+    --input-height: var(--input-xs-height, var(--size-24));
+    --input-padding: var(--input-xs-padding, var(--size-0) var(--size-8));
+    --input-font-size: var(--input-xs-font-size, var(--input-font-size, var(--font-xs)));
   }
   .input-sm {
-    height: var(--input-sm-height, size(36));
-    padding: var(--input-sm-padding, size(0, 12));
-    font-size: var(--input-sm-font-size, font-size(sm));
+    --input-height: var(--input-sm-height, var(--size-36));
+    --input-padding: var(--input-sm-padding, var(--size-0) var(--size-12));
+    --input-font-size: var(--input-sm-font-size, var(--input-font-size, var(--font-sm)));
   }
   .input-md {
-    height: var(--input-md-height, size(40));
-    padding: var(--input-md-padding, size(0, 14));
-    font-size: var(--input-md-font-size, font-size(base));
+    --input-height: var(--input-md-height, var(--size-40));
+    --input-padding: var(--input-md-padding, var(--size-0) var(--size-14));
+    --input-font-size: var(--input-md-font-size, var(--input-font-size, var(--font-base)));
   }
   .input-lg {
-    height: var(--input-lg-height, size(48));
-    padding: var(--input-lg-padding, size(0, 16));
-    font-size: var(--input-lg-font-size, font-size(base));
+    --input-height: var(--input-lg-height, var(--size-48));
+    --input-padding: var(--input-lg-padding, var(--size-0) var(--size-16));
+    --input-font-size: var(--input-lg-font-size, var(--input-font-size, var(--font-base)));
   }
   .input-xl {
-    height: var(--input-xl-height, size(56));
-    padding: var(--input-xl-padding, size(0, 18));
-    font-size: var(--input-xl-font-size, font-size(base));
+    --input-height: var(--input-xl-height, var(--size-56));
+    --input-padding: var(--input-xl-padding, var(--size-0) var(--size-18));
+    --input-font-size: var(--input-xl-font-size, var(--input-font-size, var(--font-base)));
   }
 
   @each $screen, $screen-value in screens() {
     @media (min-width: $screen-value) {
       .#{$screen}#{$screen-delimiter}input-xs {
-        height: var(--input-xs-height, size(24));
-        padding: var(--input-xs-padding, size(0, 8));
-        font-size: var(--input-xs-font-size, font-size(xs));
+        --input-height: var(--input-xs-height, var(--size-24));
+        --input-padding: var(--input-xs-padding, var(--size-0) var(--size-8));
+        --input-font-size: var(--input-xs-font-size, var(--input-font-size, var(--font-xs)));
       }
       .#{$screen}#{$screen-delimiter}input-sm {
-        height: var(--input-sm-height, size(36));
-        padding: var(--input-sm-padding, size(0, 12));
-        font-size: var(--input-sm-font-size, font-size(sm));
+        --input-height: var(--input-sm-height, var(--size-36));
+        --input-padding: var(--input-sm-padding, var(--size-0) var(--size-12));
+        --input-font-size: var(--input-sm-font-size, var(--input-font-size, var(--font-sm)));
       }
       .#{$screen}#{$screen-delimiter}input-md {
-        height: var(--input-md-height, size(40));
-        padding: var(--input-md-padding, size(0, 14));
-        font-size: var(--input-md-font-size, font-size(base));
+        --input-height: var(--input-md-height, var(--size-40));
+        --input-padding: var(--input-md-padding, var(--size-0) var(--size-14));
+        --input-font-size: var(--input-md-font-size, var(--input-font-size, var(--font-base)));
       }
       .#{$screen}#{$screen-delimiter}input-lg {
-        height: var(--input-lg-height, size(48));
-        padding: var(--input-lg-padding, size(0, 16));
-        font-size: var(--input-lg-font-size, font-size(base));
+        --input-height: var(--input-lg-height, var(--size-48));
+        --input-padding: var(--input-lg-padding, var(--size-0) var(--size-16));
+        --input-font-size: var(--input-lg-font-size, var(--input-font-size, var(--font-base)));
       }
       .#{$screen}#{$screen-delimiter}input-xl {
-        height: var(--input-xl-height, size(56));
-        padding: var(--input-xl-padding, size(0, 18));
-        font-size: var(--input-xl-font-size, font-size(base));
+        --input-height: var(--input-xl-height, var(--size-56));
+        --input-padding: var(--input-xl-padding, var(--size-0) var(--size-18));
+        --input-font-size: var(--input-xl-font-size, var(--input-font-size, var(--font-base)));
       }
     }
   }
-
 
   /******************************
   CHECKBOX
@@ -219,37 +222,37 @@ $include: map.get($all-config, include);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: var(--checkbox-size, size(16));
-    height: var(--checkbox-size, size(16));
+    width: var(--checkbox-size, var(--size-16));
+    height: var(--checkbox-size, var(--size-16));
     background: var(--checkbox-bg, white);
-    border: var(--checkbox-border, 1px solid fill(silver-500));
-    border-radius: var(--checkbox-radius, radius(xs));
+    border: var(--checkbox-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-500) ));
+    border-radius: var(--checkbox-radius, var(--radius-xs));
     transition: var(--checkbox-transition, background-color 100ms, border-color 100ms, color 100ms, fill 100ms, stroke 100ms, opacity 100ms, box-shadow 100ms, transform  100ms);
     cursor: pointer;
 
     &:focus {
       outline: 0;
-      box-shadow: shadow(focus);
+      box-shadow: var(--shadow-focus);
     }
     &:hover {
-      border: var(--checkbox-hover-border, 1px solid fill(silver-800));
+      border: var(--checkbox-hover-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
     }
     &:checked {
-      border: var(--checkbox-checked-border, 1px solid fill(primary-500));
-      background-color: var(--checkbox-checked-bg, fill(primary-500));
+      border: var(--checkbox-checked-border, 1px solid hsla( var(--blue-hue), var(--blue-sat), 50% ));
+      background-color: var(--checkbox-checked-bg, hsla( var(--blue-hue), var(--blue-sat), 50% ));
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
       &:disabled {
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
       }
       &:hover {
-        border: var(--checkbox-checked-border, 1px solid fill(primary-500));
+        border: var(--checkbox-checked-border, 1px solid hsl( var(--blue-hue), var(--blue-sat), 50% ));
       }
     }
     &:disabled {
-      border-color: var(--checkbox-disabled-border, fill(silver-400));
-      background-color: var(--checkbox-disabled-bg, fill(silver-300));
+      border-color: var(--checkbox-disabled-border, hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
+      background-color: var(--checkbox-disabled-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-800) ));
       &:hover {
-        border: var(--checkbox-disabled-border, 1px solid fill(silver-400));
+        border: var(--checkbox-disabled-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
       }
     }
   }
@@ -280,37 +283,37 @@ $include: map.get($all-config, include);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: var(--radio-size, size(16));
-    height: var(--radio-size, size(16));
+    width: var(--radio-size, var(--size-16));
+    height: var(--radio-size, var(--size-16));
     background: var(--radio-bg, white);
-    border: var(--radio-border, 1px solid fill(silver-500));
+    border: var(--radio-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-500) ));
     border-radius: var(--radio-radius, 9999px);
     transition: var(--radio-transition, background-color 100ms, border-color 100ms, color 100ms, fill 100ms, stroke 100ms, opacity 100ms, box-shadow 100ms, transform  100ms);
     cursor: pointer;
 
     &:focus {
       outline: 0;
-      box-shadow: shadow(focus);
+      box-shadow: var(--shadow-focus);
     }
     &:hover {
-      border: var(--radio-hover-border, 1px solid fill(silver-800));
+      border: var(--radio-hover-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
     }
     &:checked {
-      border: var(--radio-checked-border, 1px solid fill(primary-500));
-      background-color: var(--radio-checked-bg, fill(primary-500));
+      border: var(--radio-checked-border, 1px solid hsla( var(--blue-hue), var(--blue-sat), 50% ));
+      background-color: var(--radio-checked-bg, hsla( var(--blue-hue), var(--blue-sat), 50% ));
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
       &:disabled {
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23666'/%3e%3c/svg%3e");
       }
       &:hover {
-        border: var(--radio-checked-border, 1px solid fill(primary-500));
+        border: var(--radio-checked-border, 1px solid hsl( var(--blue-hue), var(--blue-sat), 50% ));
       }
     }
     &:disabled {
-      border-color: var(--radio-disabled-border, fill(silver-400));
-      background-color: var(--radio-disabled-bg, fill(silver-300));
+      border-color: var(--radio-disabled-border, hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
+      background-color: var(--radio-disabled-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-800) ));
       &:hover {
-        border: var(--radio-disabled-border, 1px solid fill(silver-400));
+        border: var(--radio-disabled-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
       }
     }
   }
@@ -337,28 +340,28 @@ $include: map.get($all-config, include);
 
     &:hover {
       .toggle__switch {
-        background: var(--toggle-hover-bg, fill(silver-700));
+        background: var(--toggle-hover-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-600) ));
       }
     }
 
     input {
       display: none;
       &:checked + .toggle__switch {
-        background: var(--toggle-checked-bg, fill(green, brighten-2));
+        background: var(--toggle-checked-bg, hsl( var(--green-hue), var(--green-sat), var(--shade-100) ));
       }
       &:checked + .toggle__switch:before {
-        transform: translateX(var(--toggle-checked-translate, size(20)));
+        transform: translateX(var(--toggle-checked-translate, var(--size-20)));
       }
       &:disabled + .toggle__switch {
-        background: var(--toggle-disabled-bg, fill(silver-300));
+        background: var(--toggle-disabled-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-600) ));
       }
     }
   }
   .toggle__switch {
     position: relative;
-    width: var(--toggle-width, size(40));
-    height: var(--toggle-height, size(20));
-    background: var(--toggle-bg, fill(silver-500));
+    width: var(--toggle-width, var(--size-40));
+    height: var(--toggle-height, var(--size-20));
+    background: var(--toggle-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-500) ));
     transition: var(--toggle-transition, background-color 200ms, border-color 200ms, color 200ms, fill 200ms, stroke 200ms, opacity 200ms, box-shadow 200ms, transform  200ms);
     border-radius: var(--toggle-radius, 9999px);
 
@@ -436,46 +439,46 @@ $include: map.get($all-config, include);
 
     select {
       width: 100%;
-      height: var(--select-height, size(40));
-      padding: var(--select-padding, size(0, 16));
+      height: var(--select-height, var(--size-40));
+      padding: var(--select-padding, var(--size-0) var(--size-14));
       background: var(--select-bg, white);
-      border: var(--select-border, 1px solid fill(silver-300));
-      border-radius: var(--select-radius, radius(xs));
+      border: var(--select-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-500) ));
+      border-radius: var(--select-radius, var(--radius-xs));
       box-shadow: var(--select-shadow, none);
       outline: 0;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
-      font-size: var(--select-font-size, font-size(md));
+      font-size: var(--select-font-size, var(--font-base));
       line-height: 1.5;
       transition: var(--select-transition, background-color 100ms, border-color 100ms, color 100ms, fill 100ms, stroke 100ms, opacity 100ms, box-shadow 100ms, transform  100ms);
       cursor: pointer;
 
       // PSEUDOS
       &:hover {
-        border: var(--select-hover-border, 1px solid fill(silver-500));
+        border: var(--select-hover-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
         box-shadow: var(--select-hover-shadow, none);
       }
       &:focus {
-        border: var(--select-focus-border, 1px solid fill(silver-500));
+        border: var(--select-focus-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
         box-shadow: var(--select-focus-shadow, shadow(focus));
       }
       &:disabled {
-        border: var(--select-disabled-border, 1px solid fill(silver-400));
-        background: var(--select-disabled-bg, fill(silver-300));
-        color: var(--select-disabled-color, fill(gray-400));
+        border: var(--select-disabled-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
+        background: var(--select-disabled-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-800) ));
+        color: var(--select-disabled-color, hsl( var(--gray-hue), var(--gray-sat), var(--shade-400) ));
         pointer-events: none;
       }
     }
 
     &:hover {
       &:after {
-        border-color: var(--select-hover-angle-color, fill(gray-300));
+        border-color: var(--select-hover-angle-color, hsl( var(--gray-hue), var(--gray-sat), var(--tint-200) ));
       }
     }
     &:focus {
       &:after {
-        border-color: var(--select-hover-focus-color, fill(gray-300));
+        border-color: var(--select-hover-focus-color, hsl( var(--gray-hue), var(--gray-sat), var(--tint-200) ));
       }
     }
 
@@ -483,34 +486,34 @@ $include: map.get($all-config, include);
     &:after {
       position: absolute;
       top: calc(50% - 6px);
-      right: size(14);
+      right: var(--size-14);
       content: "";
       display: block;
       width: 8px;
       height: 8px;
-      border: solid var(--select-angle-color, fill(gray-300));
+      border: solid var(--select-angle-color, hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       transition: 100ms;
     }
 
     // STATES
-    &.is-success select {
-      border: var(--select-success-border, 1px solid fill(lime, brighten-2));
+    &.is-success {
+      border: var(--select-success-border, 1px solid hsl( var(--green-hue), var(--green-sat), var(--shade-100) ));
       &:focus {
-        box-shadow: var(--select-focus-success-shadow, shadow(focus-success));
+        box-shadow: var(--select-focus-success-shadow, var(--shadow-focus-success));
       }
     }
-    &.is-warning select {
-      border: var(--select-warning-border, 1px solid fill(yellow, brighten-8));
+    &.is-warning {
+      border: var(--select-warning-border, 1px solid hsl( var(--yellow-hue), var(--yellow-sat), 50% ));
       &:focus {
-        box-shadow: var(--select-focus-warning-shadow, shadow(focus-warning));
+        box-shadow: var(--select-focus-warning-shadow, var(--shadow-focus-warning));
       }
     }
-    &.is-danger select {
-      border: var(--select-danger-border, 1px solid fill(red, brighten-4, lighten-1));
+    &.is-danger {
+      border: var(--select-danger-border, 1px solid hsl( var(--red-hue), var(--red-sat), 50% ));
       &:focus {
-        box-shadow: var(--select-focus-danger-shadow, shadow(focus-danger));
+        box-shadow: var(--select-focus-danger-shadow, var(--shadow-focus-danger));
       }
     }
   }
@@ -520,52 +523,52 @@ $include: map.get($all-config, include);
   // SIZES
   .select-xs {
     select {
-      height: var(--select-xs-height, size(24));
-      padding: var(--select-xs-padding, size(0, 8));
-      font-size: var(--select-xs-font-size, font-size(xs));
+      --select-height: var(--select-xs-height, var(--size-24));
+      --select-padding: var(--select-xs-padding, var(--size-0) var(--size-8));
+      --select-font-size: var(--select-xs-font-size, var(--select-font-size, var(--font-xs)));
     }
     &:after {
-      right: size(14);
+      right: var(--size-14);
     }
   }
   .select-sm {
     select {
-      height: var(--select-sm-height, size(36));
-      padding: var(--select-sm-padding, size(0, 12));
-      font-size: var(--select-sm-font-size, font-size(sm));
+      --select-height: var(--select-sm-height, var(--size-36));
+      --select-padding: var(--select-sm-padding, var(--size-0) var(--size-12));
+      --select-font-size: var(--select-sm-font-size, var(--select-font-size, var(--font-sm)));
     }
     &:after {
-      right: size(14);
+      right: var(--size-14);
     }
   }
   .select-md {
     select {
-      height: var(--select-md-height, size(40));
-      padding: var(--select-md-padding, size(0, 14));
-      font-size: var(--select-md-font-size, font-size(base));
+      --select-height: var(--select-md-height, var(--size-40));
+      --select-padding: var(--select-md-padding, var(--size-0) var(--size-14));
+      --select-font-size: var(--select-md-font-size, var(--select-font-size, var(--font-base)));
     }
     &:after {
-      right: size(16);
+      right: var(--size-14);
     }
   }
   .select-lg {
     select {
-      height: var(--select-lg-height, size(48));
-      padding: var(--select-lg-padding, size(0, 16));
-      font-size: var(--select-lg-font-size, font-size(base));
+      --select-height: var(--select-lg-height, var(--size-48));
+      --select-padding: var(--select-lg-padding, var(--size-0) var(--size-16));
+      --select-font-size: var(--select-lg-font-size, var(--select-font-size, var(--font-base)));
     }
     &:after {
-      right: size(18);
+      right: var(--size-16);
     }
   }
   .select-xl {
     select {
-      height: var(--select-xl-height, size(56));
-      padding: var(--select-xl-padding, size(0, 18));
-      font-size: var(--select-xl-font-size, font-size(base));
+      --select-height: var(--select-xl-height, var(--size-56));
+      --select-padding: var(--select-xl-padding, var(--size-0) var(--size-18));
+      --select-font-size: var(--select-xl-font-size, var(--select-font-size, var(--font-base)));
     }
     &:after {
-      right: size(20);
+      right: var(--size-18);
     }
   }
 
@@ -573,56 +576,54 @@ $include: map.get($all-config, include);
     @media (min-width: $screen-value) {
       .#{$screen}#{$screen-delimiter}select-xs {
         select {
-          height: var(--select-xs-height, size(24));
-          padding: var(--select-xs-padding, size(0, 8));
-          font-size: var(--select-xs-font-size, font-size(xs));
+          --select-height: var(--select-xs-height, var(--size-24));
+          --select-padding: var(--select-xs-padding, var(--size-0) var(--size-8));
+          --select-font-size: var(--select-xs-font-size, var(--select-font-size, var(--font-xs)));
         }
         &:after {
-          right: size(14);
+          right: var(--size-14);
         }
       }
       .#{$screen}#{$screen-delimiter}select-sm {
         select {
-          height: var(--select-sm-height, size(36));
-          padding: var(--select-sm-padding, size(0, 12));
-          font-size: var(--select-sm-font-size, font-size(sm));
+          --select-height: var(--select-sm-height, var(--size-36));
+          --select-padding: var(--select-sm-padding, var(--size-0) var(--size-12));
+          --select-font-size: var(--select-sm-font-size, var(--select-font-size, var(--font-sm)));
         }
         &:after {
-          right: size(14);
+          right: var(--size-14);
         }
       }
       .#{$screen}#{$screen-delimiter}select-md {
         select {
-          height: var(--select-md-height, size(40));
-          padding: var(--select-md-padding, size(0, 14));
-          font-size: var(--select-md-font-size, font-size(base));
+          --select-height: var(--select-md-height, var(--size-40));
+          --select-padding: var(--select-md-padding, var(--size-0) var(--size-14));
+          --select-font-size: var(--select-md-font-size, var(--select-font-size, var(--font-base)));
         }
         &:after {
-          right: size(16);
+          right: var(--size-14);
         }
       }
       .#{$screen}#{$screen-delimiter}select-lg {
         select {
-          height: var(--select-lg-height, size(48));
-          padding: var(--select-lg-padding, size(0, 16));
-          font-size: var(--select-lg-font-size, font-size(base));
+          --select-height: var(--select-lg-height, var(--size-48));
+          --select-padding: var(--select-lg-padding, var(--size-0) var(--size-16));
+          --select-font-size: var(--select-lg-font-size, var(--select-font-size, var(--font-base)));
         }
         &:after {
-          right: size(18);
+          right: var(--size-16);
         }
       }
       .#{$screen}#{$screen-delimiter}select-xl {
         select {
-          height: var(--select-xl-height, size(56));
-          padding: var(--select-xl-padding, size(0, 18));
-          font-size: var(--select-xl-font-size, font-size(base));
+          --select-height: var(--select-xl-height, var(--size-56));
+          --select-padding: var(--select-xl-padding, var(--size-0) var(--size-18));
+          --select-font-size: var(--select-xl-font-size, var(--select-font-size, var(--font-base)));
         }
         &:after {
-          right: size(20);
+          right: var(--size-18);
         }
       }
-
-      
     }
   }
 
@@ -655,10 +656,10 @@ $include: map.get($all-config, include);
   .textarea {
     position: relative;
     width: 100%;
-    padding: var(--textarea-padding, size(16));
+    padding: var(--textarea-padding, var(--size-16));
     background: var(--textarea-bg, white);
-    border: var(--textarea-border, 1px solid fill(silver-300));
-    border-radius: var(--textarea-radius, radius(xs));
+    border: var(--textarea-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-500) ));
+    border-radius: var(--textarea-radius, var(--radius-xs));
     box-shadow: var(--textarea-shadow, none);
     outline: 0;
     appearance: none;
@@ -666,36 +667,37 @@ $include: map.get($all-config, include);
 
     // PSEUDOS
     &:hover {
-      border: var(--textarea-hover-border, 1px solid fill(silver-500));
+      border: var(--textarea-hover-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
       box-shadow: var(--textarea-hover-shadow, none);
     }
     &:focus {
-      border: var(--textarea-focus-border, 1px solid fill(silver-500));
+      border: var(--textarea-focus-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
       box-shadow: var(--textarea-focus-shadow, shadow(focus));
     }
     &:disabled {
-      background: var(--textarea-disabled-bg, fill(silver-300));
-      color: var(--textarea-disabled-color, fill(gray-400));
+      border: var(--textarea-disabled-border, 1px solid hsl( var(--gray-hue), var(--gray-sat), var(--tint-400) ));
+      background: var(--textarea-disabled-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-800) ));
+      color: var(--textarea-disabled-color, hsl( var(--gray-hue), var(--gray-sat), var(--shade-400) ));
       pointer-events: none;
     }
 
     // STATES
     &.is-success {
-      border: var(--textarea-success-border, 1px solid fill(lime, brighten-2));
+      border: var(--textarea-success-border, 1px solid hsl( var(--green-hue), var(--green-sat), var(--shade-100) ));
       &:focus {
-        box-shadow: var(--textarea-focus-success-shadow, shadow(focus-success));
+        box-shadow: var(--textarea-focus-success-shadow, var(--shadow-focus-success));
       }
     }
     &.is-warning {
-      border: var(--textarea-warning-border, 1px solid fill(yellow, brighten-8));
+      border: var(--textarea-warning-border, 1px solid hsl( var(--yellow-hue), var(--yellow-sat), 50% ));
       &:focus {
-        box-shadow: var(--textarea-focus-warning-shadow, shadow(focus-warning));
+        box-shadow: var(--textarea-focus-warning-shadow, var(--shadow-focus-warning));
       }
     }
     &.is-danger {
-      border: var(--textarea-danger-border, 1px solid fill(red, brighten-4, lighten-1));
+      border: var(--textarea-danger-border, 1px solid hsl( var(--red-hue), var(--red-sat), 50% ));
       &:focus {
-        box-shadow: var(--textarea-focus-danger-shadow, shadow(focus-danger));
+        box-shadow: var(--textarea-focus-danger-shadow, var(--shadow-focus-danger));
       }
     }
   }

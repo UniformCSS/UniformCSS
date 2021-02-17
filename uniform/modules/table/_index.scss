@@ -40,10 +40,10 @@ CUSTOM PROPERTIES
   }
   tr {
     display: block;
-    margin-bottom: var(--table-stack-margin, size(18));
-    border-radius: var(--table-radius, radius(sm));
+    margin-bottom: var(--table-stack-margin, var(--size-18));
+    border-radius: var(--table-radius, var(--radius-sm));
     background-color: var(--table-bg);
-    box-shadow: var(--table-shadow, shadow(sm));
+    box-shadow: var(--table-shadow, var(--shadow-sm));
     
     &:last-child {
       margin-bottom: 0;
@@ -54,27 +54,27 @@ CUSTOM PROPERTIES
   }
   td {
     display: block;
-    padding: var(--table-td-padding, size(12, 16));
+    padding: var(--table-td-padding, var(--size-12) var(--size-16));
     background-color: var(--table-bg, white);
     &:first-child {
-      border-top-right-radius: var(--table-radius, radius(sm));
-      border-top-left-radius: var(--table-radius, radius(sm));
+      border-top-right-radius: var(--table-radius, var(--radius-sm));
+      border-top-left-radius: var(--table-radius, var(--radius-sm));
     }
     &:last-child {
       border-bottom: 0;
-      border-bottom-right-radius: var(--table-radius, radius(sm));
-      border-bottom-left-radius: var(--table-radius, radius(sm));
+      border-bottom-right-radius: var(--table-radius, var(--radius-sm));
+      border-bottom-left-radius: var(--table-radius, var(--radius-sm));
     }
     &[data-table-label] {
       // data label pseudo for responsive table
       &:before {
         display: block;
         content: attr(data-table-label);
-        margin-bottom: var(--table-label-margin, size(10));
-        font-size: var(--table-label-font-size, font-size(2xs));
+        margin-bottom: var(--table-label-margin, var(--size-10));
+        font-size: var(--table-label-font-size, var(--font-2xs));
         font-weight: var(--table-label-font-weight, 600);
         text-transform: var(--table-label-text-transform, uppercase);
-        letter-spacing: var(--table-label-tracking, tracking(base));
+        letter-spacing: var(--table-label-tracking, var(--tracking-normal));
         white-space: nowrap;
         color: var(--table-label-color, black);
       }
@@ -87,7 +87,7 @@ CUSTOM PROPERTIES
 }
 
 @mixin table-unstack {
-  box-shadow: var(--table-shadow, shadow(sm));
+  box-shadow: var(--table-shadow, var(--shadow-sm));
   background-color: var(--table-bg, white);
   thead {
     display: table-header-group;
@@ -103,30 +103,30 @@ CUSTOM PROPERTIES
     &:last-child {
       td {
         &:first-child {
-          border-bottom-left-radius: var(--table-radius, radius(sm));
+          border-bottom-left-radius: var(--table-radius, var(--radius-sm));
         }
         &:last-child {
-          border-bottom-right-radius: var(--table-radius, radius(sm));
+          border-bottom-right-radius: var(--table-radius, var(--radius-sm));
         }				
       }
     }
   }
   th {
     height: var(--table-th-height, size(12));
-    padding: var(--table-th-padding, size(12, 16));
+    padding: var(--table-th-padding, var(--size-12) var(--size-16));
     &:first-child {
-      border-top-left-radius: var(--table-radius, radius(sm));
+      border-top-left-radius: var(--table-radius, var(--radius-sm));
     }
     &:last-child {
-      border-top-right-radius: var(--table-radius, radius(sm));
+      border-top-right-radius: var(--table-radius, var(--radius-sm));
     }
   }
   td {
     display: table-cell;
     height: var(--table-td-height, size(12));
-    padding: var(--table-td-padding, size(12, 16));
+    padding: var(--table-td-padding, var(--size-12) var(--size-16));
     background-color: transparent;
-    box-shadow: var(--table-th-border, inset 0px -1px 0 0 fill(silver-200));
+    box-shadow: var(--table-th-border, inset 0px -1px 0 0 hsl( var(--gray-hue), var(--gray-sat), var(--tint-700) ));
     &:first-child {
       border-radius: 0;
     }
@@ -150,19 +150,19 @@ $include: map.get($all-config, include);
   .table {
     width: 100%;
     text-align: left;
-    border-radius: var(--table-radius, radius(sm));
+    border-radius: var(--table-radius, var(--radius-sm));
     background-color: var(--table-bg, white);
-    box-shadow: var(--table-shadow, shadow(sm));
+    box-shadow: var(--table-shadow, var(--shadow-sm));
     
     tr {
       &:last-child {
         td {
           border-bottom: 0;
           &:first-child {
-            border-bottom-left-radius: var(--table-radius, radius(sm));
+            border-bottom-left-radius: var(--table-radius, var(--radius-sm));
           }
           &:last-child {
-            border-bottom-right-radius: var(--table-radius, radius(sm));
+            border-bottom-right-radius: var(--table-radius, var(--radius-sm));
           }				
         }
       }
@@ -170,24 +170,24 @@ $include: map.get($all-config, include);
     
     th {
       height: var(--table-th-height, size(12));
-      padding: var(--table-th-padding, size(12, 16));
+      padding: var(--table-th-padding, var(--size-12) var(--size-16));
       // Inset instead of border to allow for sticky headers to have border
-      box-shadow: var(--table-th-border, inset 0px -1px 0 0 fill(silver-200));
+      box-shadow: var(--table-th-border, inset 0px -1px 0 0 hsl( var(--gray-hue), var(--gray-sat), var(--tint-700) ));
       background: var(--table-th-bg, white);
       white-space: nowrap;
       
       &:first-child {
-        border-top-left-radius: var(--table-radius, radius(sm));
+        border-top-left-radius: var(--table-radius, var(--radius-sm));
       }
       &:last-child {
-        border-top-right-radius: var(--table-radius, radius(sm));
+        border-top-right-radius: var(--table-radius, var(--radius-sm));
       }
     }
   
     td {
       height: var(--table-td-height, size(12));
-      padding: var(--table-td-padding, size(12, 16));
-      box-shadow: var(--table-td-border, inset 0px -1px 0 0 fill(silver-200));
+      padding: var(--table-td-padding, var(--size-12) var(--size-16));
+      box-shadow: var(--table-td-border, inset 0px -1px 0 0 hsl( var(--gray-hue), var(--gray-sat), var(--tint-700) ));
     }
   }
 
@@ -198,7 +198,7 @@ $include: map.get($all-config, include);
   .table-alt {
     --table-td-border: 0;
     tbody tr:nth-child(even) {
-      background-color: var(--table-alt-bg, fill(silver-100));
+      background-color: var(--table-alt-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-900) ));
     }
   }
 

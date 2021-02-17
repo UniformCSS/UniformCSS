@@ -1,22 +1,22 @@
 @use "uniform/core";
 @use "sass:map";
 
-$name: split-lighten;
-$shorthand: split;
+$name: placeholder-opacity;
+$shorthand: placeholder;
 $responsive: false;
 $responsive-pseudos: false;
-$extra-selector: '> * + *';
+$extra-selector: #{'::placeholder'};
 
-$properties: (#{--split-ltn});
+$properties: (#{--placeholder-opacity});
 $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.lighten-levels() 
+    core.opacity-levels(),
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

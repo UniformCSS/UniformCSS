@@ -1,22 +1,22 @@
 @use "uniform/core";
 @use "sass:map";
 
-$name: text-opacity;
-$shorthand: text;
+$name: background-shade;
+$shorthand: bg;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: null;
 
-$properties: (#{--text-opacity});
+$properties: (#{--bg-ltn});
 $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.opacity-levels(),
+    core.var-shade-levels(),
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

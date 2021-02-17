@@ -1,22 +1,22 @@
 @use "uniform/core";
 @use "sass:map";
 
-$name: background-brighten;
-$shorthand: bg;
+$name: border-tint;
+$shorthand: border;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: null;
 
-$properties: (#{--bg-sat});
+$properties: (#{--border-ltn});
 $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-brighten-levels(),
+    core.var-tint-levels(),
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

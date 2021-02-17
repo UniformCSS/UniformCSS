@@ -1,22 +1,25 @@
 @use "uniform/core";
 @use "sass:map";
 
-$name: text-lightness;
-$shorthand: text;
+$name: placeholder-color;
+$shorthand: placeholder;
 $responsive: false;
 $responsive-pseudos: false;
-$extra-selector: null;
+$extra-selector: #{'::placeholder'};
 
-$properties: (#{--text-ltn});
-$custom-properties: ();
+$properties: (color);
+$custom-properties: (
+  --placeholder-ltn: 50%,
+  --placeholder-opacity: 1,
+);
 
 $variants: (
 	core.merge(
-    core.var-lighten-levels(),
+    core.placeholder-colors()
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

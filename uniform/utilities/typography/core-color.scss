@@ -2,16 +2,15 @@
 @use "sass:map";
 
 $name: color;
-$shorthand: text;
+$shorthand: color;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: null;
 
 $properties: (color);
 $custom-properties: (
-  --text-sat: 0%,
-  --text-ltn: 0%,
-  --text-opacity: 1,
+  --color-ltn: 50%,
+  --color-opacity: 1,
 );
 
 $variants: (
@@ -20,7 +19,7 @@ $variants: (
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

@@ -1,22 +1,22 @@
 @use "uniform/core";
 @use "sass:map";
 
-$name: text-darken;
-$shorthand: text;
+$name: split-tint;
+$shorthand: split;
 $responsive: false;
 $responsive-pseudos: false;
-$extra-selector: null;
+$extra-selector: '> * + *';
 
-$properties: (#{--text-ltn});
+$properties: (#{--split-ltn});
 $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-darken-levels(),
+    core.tint-levels() 
 	)
 );
 
-$pseudos: (hover, group-hover, dark);
+$pseudos: (hover, group-hover, focus, dark);
 
 $config: (
   utility: (

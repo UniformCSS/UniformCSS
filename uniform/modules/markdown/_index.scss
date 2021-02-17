@@ -9,7 +9,7 @@ $include: map.get($all-config, include);
 
   .markdown {
 
-    font-size: font-size(base);
+    font-size: var(--font-base);
 
     /******************************
     HEADING
@@ -54,35 +54,35 @@ $include: map.get($all-config, include);
     }
     
     & > h1 {
-      margin-top: var(--markdown-h1-margin-top, size(48));
-      margin-bottom: var(--markdown-h1-margin-bottom, size(18));
-      font-size: var(--markdown-h1-size, font-size(6xl));
-      font-weight: var(--markdown-h1-weight, font-weight(extrabold));
-      letter-spacing: var(--markdown-h1-tracking, tracking(tight));
+      margin-top: var(--markdown-h1-margin-top, var(--size-48));
+      margin-bottom: var(--markdown-h1-margin-bottom, var(--size-18));
+      font-size: var(--markdown-h1-size, var(--font-6xl));
+      font-weight: var(--markdown-h1-weight, var(--font-bold));
+      letter-spacing: var(--markdown-h1-tracking, 0);
     }
 
     & > h2 {
-      margin-top: var(--markdown-h2-margin-top, size(40));
-      margin-bottom: var(--markdown-h2-margin-bottom, size(18));
-      font-size: var(--markdown-h2-size, font-size(2xl));
-      font-weight: var(--markdown-h2-weight, font-weight(extrabold));
-      letter-spacing: var(--markdown-h2-tracking, tracking(tight));
+      margin-top: var(--markdown-h2-margin-top, var(--size-40));
+      margin-bottom: var(--markdown-h2-margin-bottom, var(--size-18));
+      font-size: var(--markdown-h2-size, var(--font-2xl));
+      font-weight: var(--markdown-h2-weight, var(--font-bold));
+      letter-spacing: var(--markdown-h2-tracking, 0);
     }
 
     & > h3 {
-      margin-top: var(--markdown-h3-margin-top, size(36));
-      margin-bottom: var(--markdown-h3-margin-bottom, size(16));
-      font-size: var(--markdown-h3-size, font-size(xl));
-      font-weight: var(--markdown-h3-weight, font-weight(extrabold));
-      letter-spacing: var(--markdown-h3-tracking, tracking(tight));
+      margin-top: var(--markdown-h3-margin-top, var(--size-36));
+      margin-bottom: var(--markdown-h3-margin-bottom, var(--size-16));
+      font-size: var(--markdown-h3-size, var(--font-xl));
+      font-weight: var(--markdown-h3-weight, var(--font-bold));
+      letter-spacing: var(--markdown-h3-tracking, 0);
     }
 
     & > h4 {
-      margin-top: var(--markdown-h4-margin-top, size(32));
-      margin-bottom: var(--markdown-h4-margin-bottom, size(14));
-      font-size: var(--markdown-h4-size, font-size(lg));
-      font-weight: var(--markdown-h4-weight, font-weight(extrabold));
-      letter-spacing: var(--markdown-h4-tracking, tracking(tight));
+      margin-top: var(--markdown-h4-margin-top, var(--size-32));
+      margin-bottom: var(--markdown-h4-margin-bottom, var(--size-14));
+      font-size: var(--markdown-h4-size, var(--font-lg));
+      font-weight: var(--markdown-h4-weight, var(--font-bold));
+      letter-spacing: var(--markdown-h4-tracking, 0);
     }
 
     /******************************
@@ -95,8 +95,8 @@ $include: map.get($all-config, include);
 
     & > hr {
       height: var(--markdown-hr-width, 1px);
-      margin-top: var(--markdown-hr-margin, size(64));
-      margin-bottom: var(--markdown-hr-margin, size(64));
+      margin-top: var(--markdown-hr-margin, var(--size-64));
+      margin-bottom: var(--markdown-hr-margin, var(--size-64));
       border: 0;
       background: var(--markdown-hr-color, #e3e5e8);
     }
@@ -114,11 +114,11 @@ $include: map.get($all-config, include);
     
     & > p code, & > ul li code, & > blockquote code {
       padding: var(--markdown-code-padding, 5px 6px);
-      font-size: var(--markdown-code-font-size, font-size(sm));
-      border-radius: var(--markdown-code-radius, radius(sm));
-      background: var(--markdown-code-bg, fill(blue, base, base, opacity-10));
+      font-size: var(--markdown-code-font-size, var(--font-sm));
+      border-radius: var(--markdown-code-radius, var(--radius-sm));
+      background: var(--markdown-code-bg, hsla( var(--blue-hue), var(--blue-sat), 50%, var(--opacity-10) ));
       border: var(--markdown-code-border, 0);
-      color: var(--markdown-code-color, fill(blue, brighten-6, lighten-1));
+      color: var(--markdown-code-color, hsl( var(--blue-hue), var(--blue-sat), 50% ));
     }
 
     /******************************
@@ -133,10 +133,10 @@ $include: map.get($all-config, include);
 
     & > blockquote {
       margin-bottom: var(--markdown-blockquote-margin, 1.5em);
-      padding: var(--markdown-blockquote-padding, size(14, 24));
-      background: var(--markdown-blockquote-bg, fill(silver-200));
-      border-radius: var(--markdown-blockquote-radius, radius(2xs));
-      box-shadow: var(--markdown-blockquote-shadow, inset 4px 0px 0px 0px fill(silver-400));
+      padding: var(--markdown-blockquote-padding, var(--size-14, 24));
+      background: var(--markdown-blockquote-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-800) ));
+      border-radius: var(--markdown-blockquote-radius, var(--radius-xs));
+      box-shadow: var(--markdown-blockquote-shadow, inset 4px 0px 0px 0px hsl( var(--gray-hue), var(--gray-sat), var(--tint-600) ));
       
       &:last-child {
         margin-bottom: 0;
@@ -152,9 +152,9 @@ $include: map.get($all-config, include);
     ******************************/
 
     & > table {
-      margin-bottom: var(--markdown-table-margin, size(20));
-      font-size: var(--markdown-table-font-size, font-size(sm));
-      line-height: var(--markdown-table-leading, leading(tight));
+      margin-bottom: var(--markdown-table-margin, var(--size-20));
+      font-size: var(--markdown-table-font-size, var(--font-sm));
+      line-height: var(--markdown-table-leading, var(--leading-tight));
     }
 
     /******************************
@@ -167,15 +167,15 @@ $include: map.get($all-config, include);
 
     & > ol, ul {
       margin-bottom: var(--markdown-list-margin, 1.5em);
-      line-height: var(--markdown-list-leading, leading(base));
+      line-height: var(--markdown-list-leading, var(--leading-normal));
     }
     
     & > ul {
-      padding-left: var(--markdown-list-padding, size(24));
+      padding-left: var(--markdown-list-padding, var(--size-24));
       list-style-type: disc;
       list-style-position: inside;
       ul {
-        padding-left: var(--markdown-list-padding, size(24));
+        padding-left: var(--markdown-list-padding, var(--size-24));
         list-style-type: circle;
         list-style-position: inside;
       }
@@ -197,9 +197,9 @@ $include: map.get($all-config, include);
     ******************************/
 
     & > p a {
-      color: var(--markdown-link-color, fill(blue));
+      color: var(--markdown-link-color, hsl( var(--blue-hue), var(--blue-sat), 50% ));
       &:hover {
-        color: var(--markdown-link-hover-color, fill(blue));
+        color: var(--markdown-link-hover-color, hsl( var(--blue-hue), var(--blue-sat), 50% ));
         text-decoration: underline;
       }
     }

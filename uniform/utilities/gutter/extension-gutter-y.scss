@@ -9,8 +9,8 @@ $extra-selector: '> * + *';
 
 $properties: (margin);
 $custom-properties: (
-  --gutter-top: 0,
-  --gutter-bottom: 1,
+  --gutter-top: 1,
+  --gutter-bottom: 0,
 );
 
 $range-limit: map.get(core.$all-config, range-limits, gutter);
