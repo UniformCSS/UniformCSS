@@ -112,7 +112,7 @@ CUSTOM PROPERTIES
     }
   }
   th {
-    height: var(--table-th-height, size(12));
+    height: var(--table-th-height, var(--size-12));
     padding: var(--table-th-padding, var(--size-12) var(--size-16));
     &:first-child {
       border-top-left-radius: var(--table-radius, var(--radius-sm));
@@ -123,7 +123,7 @@ CUSTOM PROPERTIES
   }
   td {
     display: table-cell;
-    height: var(--table-td-height, size(12));
+    height: var(--table-td-height, var(--size-12));
     padding: var(--table-td-padding, var(--size-12) var(--size-16));
     background-color: transparent;
     box-shadow: var(--table-th-border, inset 0px -1px 0 0 hsl( var(--gray-hue), var(--gray-sat), var(--tint-700) ));
@@ -169,7 +169,7 @@ $include: map.get($all-config, include);
     }
     
     th {
-      height: var(--table-th-height, size(12));
+      height: var(--table-th-height, var(--size-12));
       padding: var(--table-th-padding, var(--size-12) var(--size-16));
       // Inset instead of border to allow for sticky headers to have border
       box-shadow: var(--table-th-border, inset 0px -1px 0 0 hsl( var(--gray-hue), var(--gray-sat), var(--tint-700) ));
@@ -185,7 +185,7 @@ $include: map.get($all-config, include);
     }
   
     td {
-      height: var(--table-td-height, size(12));
+      height: var(--table-td-height, var(--size-12));
       padding: var(--table-td-padding, var(--size-12) var(--size-16));
       box-shadow: var(--table-td-border, inset 0px -1px 0 0 hsl( var(--gray-hue), var(--gray-sat), var(--tint-700) ));
     }

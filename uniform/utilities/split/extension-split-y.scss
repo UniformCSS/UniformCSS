@@ -7,10 +7,10 @@ $responsive: true;
 $responsive-pseudos: false;
 $extra-selector: '> * + *';
 
-$properties: (margin);
+$properties: (border-width);
 $custom-properties: (
-  --split-top: 0,
-  --split-bottom: 1,
+  --split-top: 1,
+  --split-bottom: 0,
 );
 
 $range-limit: map.get(core.$all-config, range-limits, split-width);
@@ -18,7 +18,7 @@ $range-limit: map.get(core.$all-config, range-limits, split-width);
 $split-map: ();
 @each $size-key, $size-value in core.sizes($range-limit) {
   $map: (
-    $size-key:  calc(#{$size-value} * var(--split-top)) 0 calc(#{$size-value} * var(--split-bottom)) 0,
+    $size-key: calc(#{$size-value} * var(--split-top)) 0 calc(#{$size-value} * var(--split-bottom)) 0,
   );
   $split-map: map.merge($split-map, $map);
 }

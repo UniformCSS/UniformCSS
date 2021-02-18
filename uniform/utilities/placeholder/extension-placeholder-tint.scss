@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: placeholder-tint;
-$shorthand: placeholder;
+$shorthand: placeholder-tint;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: #{'::placeholder'};
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-tint-levels(),
+    core.tints(),
 	)
 );
 

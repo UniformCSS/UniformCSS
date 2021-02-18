@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: split-tint;
-$shorthand: split;
+$shorthand: split-tint;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: '> * + *';
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.tint-levels() 
+    core.tints() 
 	)
 );
 

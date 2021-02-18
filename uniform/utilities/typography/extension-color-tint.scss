@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: color-tint;
-$shorthand: color;
+$shorthand: color-tint;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: null;
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-tint-levels(),
+    core.tints(),
 	)
 );
 

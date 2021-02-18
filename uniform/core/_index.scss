@@ -103,8 +103,25 @@ $default-config: (
   dark-mode: false,
 
   exclude: (),
-
   include: (),
+
+  extend: (
+    shadows: (),
+    colors: (),
+    gradients: (),
+    screens: (),
+    font-families: (),
+    font-sizes: (),
+    font-weights: (),
+    leadings: (),
+    trackings: (),
+    tints: (),
+    shades: (),
+    radiuses: (),
+    opacities: (),
+    positive-sizes: (),
+    negative-sizes: (),
+  ),
 
   screens: (
     sm: 768px,
@@ -131,70 +148,70 @@ $default-config: (
     group-focus: ':group-focus',
   ),
 
-  tint-levels: (
-    tint-100: 55.24%,
-    tint-200: 60.46%,
-    tint-300: 65.68%,
-    tint-400: 70.9%,
-    tint-500: 76.12%,
-    tint-600: 81.34%,
-    tint-700: 86.56%,
-    tint-800: 91.78%,
-    tint-900: 97%,
+  tints: (
+    0: 50%,
+    100: 55.24%,
+    200: 60.46%,
+    300: 65.68%,
+    400: 70.9%,
+    500: 76.12%,
+    600: 81.34%,
+    700: 86.56%,
+    800: 91.78%,
+    900: 97%,
   ),
 
-  shade-levels: (
-    shade-100: 44.76%,
-    shade-200: 39.54%,
-    shade-300: 34.32%,
-    shade-400: 29.1%,
-    shade-500: 23.88%,
-    shade-600: 18.66%,
-    shade-700: 13.44%,
-    shade-800: 8.22%,
-    shade-900: 3%,
+  shades: (
+    0: 50%,
+    100: 44.76%,
+    200: 39.54%,
+    300: 34.32%,
+    400: 29.1%,
+    500: 23.88%,
+    600: 18.66%,
+    700: 13.44%,
+    800: 8.22%,
+    900: 3%,
   ),
 
-  opacity-levels: (
-    opacity-0: 0,
-    opacity-02: 0.02,
-    opacity-04: 0.04,
-    opacity-06: 0.06,
-    opacity-08: 0.08,
-    opacity-10: 0.1,
-    opacity-20: 0.2,
-    opacity-30: 0.3,
-    opacity-40: 0.4,
-    opacity-50: 0.5,
-    opacity-60: 0.6,
-    opacity-70: 0.7,
-    opacity-80: 0.8,
-    opacity-90: 0.9,
-    opacity-100: 1,
+  opacities: (
+    '0': 0,
+    '02': 0.02,
+    '04': 0.04,
+    '06': 0.06,
+    '08': 0.08,
+    10: 0.1,
+    20: 0.2,
+    30: 0.3,
+    40: 0.4,
+    50: 0.5,
+    60: 0.6,
+    70: 0.7,
+    80: 0.8,
+    90: 0.9,
+    100: 1,
   ),
 
   colors: (
-    red: ( hue: 0, sat: var(--color-sat, 75%) ),
-    orange: ( hue: 20, sat: var(--color-sat, 75%) ),
-    yellow: ( hue: 40, sat: var(--color-sat, 75%) ),
-    lemon: ( hue: 60, sat: var(--color-sat, 75%) ),
-    olive: ( hue: 80, sat: var(--color-sat, 75%) ),
-    lime: ( hue: 100, sat: var(--color-sat, 75%) ),
-    green: ( hue: 120, sat: var(--color-sat, 75%) ),
-    mint: ( hue: 140, sat: var(--color-sat, 75%) ),
-    teal: ( hue: 160, sat: var(--color-sat, 75%) ),
-    cyan: ( hue: 180, sat: var(--color-sat, 75%) ),
-    sky: ( hue: 200, sat: var(--color-sat, 75%) ),
-    blue: ( hue: 220, sat: var(--color-sat, 75%) ),
-    indigo: ( hue: 240, sat: var(--color-sat, 75%) ),
-    purple: ( hue: 260, sat: var(--color-sat, 75%) ),
-    orchid: ( hue: 280, sat: var(--color-sat, 75%) ),
-    magenta: ( hue: 300, sat: var(--color-sat, 75%) ),
-    pink: ( hue: 320, sat: var(--color-sat, 75%) ),
-    crimson: ( hue: 340, sat: var(--color-sat, 75%) ),
-  ),
-
-  grayscale-colors: (
+    red: ( hue: 0, sat: 75% ),
+    orange: ( hue: 20, sat: 75% ),
+    yellow: ( hue: 40, sat: 75% ),
+    lemon: ( hue: 60, sat: 75% ),
+    olive: ( hue: 80, sat: 75% ),
+    lime: ( hue: 100, sat: 75% ),
+    green: ( hue: 120, sat: 75% ),
+    mint: ( hue: 140, sat: 75% ),
+    teal: ( hue: 160, sat: 75% ),
+    cyan: ( hue: 180, sat: 75% ),
+    sky: ( hue: 200, sat: 75% ),
+    blue: ( hue: 220, sat: 75% ),
+    indigo: ( hue: 240, sat: 75% ),
+    purple: ( hue: 260, sat: 75% ),
+    orchid: ( hue: 280, sat: 75% ),
+    magenta: ( hue: 300, sat: 75% ),
+    pink: ( hue: 320, sat: 75% ),
+    crimson: ( hue: 340, sat: 75% ),
+    
     white: ( hue: 0, sat: 0% ),
     black: ( hue: 0, sat: 0% ),
 
@@ -206,7 +223,6 @@ $default-config: (
   ),
 
   gradients: (
-    gradient: linear-gradient(var(--gradient)),
     gradient-x-from-white: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%),
     gradient-x-to-white: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%),
     gradient-y-from-white: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%),
@@ -340,6 +356,10 @@ $default-config: (
   ),
 
   font-sizes: (
+    13xl: rem(120),
+    12xl: rem(104),
+    11xl: rem(88),
+
     10xl: rem(72),
     9xl: rem(64),
     8xl: rem(56),
@@ -353,10 +373,7 @@ $default-config: (
 
     xl: rem(20),
     lg: rem(18),
-
-    base: rem(16),
-
-    md: rem(15),
+    md: rem(16),
     sm: rem(14),
     xs: rem(12),
     2xs: rem(10),
@@ -381,18 +398,7 @@ $default-config: (
     normal: 1.75,
     loose: 2,
     looser: 2.25,
-    loosest: 2.5,
-
-    0: 1,
-    1: 1.1,
-    2: 1.2,
-    3: 1.3,
-    4: 1.4,
-    5: 1.5,
-    6: 1.6,
-    7: 1.7,
-    8: 1.8,
-    9: 1.9
+    loosest: 2.5
   ),
 
   trackings: (
@@ -403,26 +409,6 @@ $default-config: (
     loose: 0.025em,
     looser: 0.05em,
     loosest: 0.075em,
-
-    n9: -0.09em,
-    n8: -0.08em,
-    n7: -0.07em,
-    n6: -0.06em,
-    n5: -0.05em,
-    n4: -0.04em,
-    n3: -0.03em,
-    n2: -0.02em,
-    n1: -0.01em,
-    0: 0,
-    1: 0.01em,
-    2: 0.02em,
-    3: 0.03em,
-    4: 0.04em,
-    5: 0.05em,
-    6: 0.06em,
-    7: 0.07em,
-    8: 0.08em,
-    9: 0.09em,
   ),
 
   radiuses: (
@@ -456,16 +442,16 @@ $default-config: (
       0 15px 12px rgba(0, 0, 0, 0.22),
     ),
     focus: (
-      0 0 0 3px rgb(63 96 191 / 20%)
+      0 0 0 3px rgb(63 96 191 / 25%)
     ),
     focus-success: (
-      0 0 0 3px rgb(103 204 51 / 20%)
+      0 0 0 3px rgb(103 204 51 / 25%)
     ),
     focus-warning: (
-      0 0 0 3px rgb(242 166 13 / 20%)
+      0 0 0 3px rgb(242 166 13 / 25%)
     ),
     focus-danger: (
-      0 0 0 3px rgb(221 61 60 / 20%)
+      0 0 0 3px rgb(221 61 60 / 25%)
     )
   ),
 
@@ -557,13 +543,28 @@ $leadings: map.get($all-config, leadings);
 $trackings: map.get($all-config, trackings);
 $radiuses: map.get($all-config, radiuses);
 
-$tint-levels: map.get($all-config, tint-levels);
-$shade-levels: map.get($all-config, shade-levels);
-$opacity-levels: map.get($all-config, opacity-levels);
+$tints: map.get($all-config, tints);
+$shades: map.get($all-config, shades);
+$opacities: map.get($all-config, opacities);
 
 $colors: map.get($all-config, colors);
-$grayscale-colors: map.get($all-config, grayscale-colors);
 $gradients: map.get($all-config, gradients);
+
+$extend-screens: map.get($all-config, extend, screens);
+$extend-positive-sizes: map.get($all-config, extend, positive-sizes);
+$extend-negative-sizes: map.get($all-config, extend, negative-sizes);
+$extend-shadows: map.get($all-config, extend, shadows);
+$extend-font-families: map.get($all-config, extend, font-families);
+$extend-font-sizes: map.get($all-config, extend, font-sizes);
+$extend-font-weights: map.get($all-config, extend, font-weights);
+$extend-leadings: map.get($all-config, extend, leadings);
+$extend-trackings: map.get($all-config, extend, trackings);
+$extend-radiuses: map.get($all-config, extend, radiuses);
+$extend-tints: map.get($all-config, extend, tints);
+$extend-shades: map.get($all-config, extend, shades);
+$extend-opacities: map.get($all-config, extend, opacities);
+$extend-colors: map.get($all-config, extend, colors);
+$extend-gradients: map.get($all-config, extend, gradients);
 
 
 // PRIVATE FUNCTIONS
@@ -576,20 +577,6 @@ $gradients: map.get($all-config, gradients);
     $collection: map.merge($collection, $map);
   }
   @return $collection;
-}
-
-// VARIABLIZE MAP FUNCTION (CSS CUSTOM PROPERTIES)
-@function variablize-map($map, $shorthand) {
-  $variablized-map: ();
-  @each $key, $value in $map {
-    $delimiter: if($shorthand == null, null, '-');
-    $map: (
-      $key: var(--#{$shorthand}#{$delimiter}#{$key}),
-    );
-    $variablized-map: map.merge($variablized-map, $map);
-  }
-
-  @return $variablized-map;
 }
 
 // GENERATE SCREENS MAP
@@ -608,34 +595,127 @@ $gradients: map.get($all-config, gradients);
 // MERGED VARIABLES
 // ============================================================
 
+// MERGED SCREENS
+$merged-screens: ();
+@if ($screens != null) {
+  $merged-screens: map.deep-merge($merged-screens, $screens);
+}
+$merged-screens: map.deep-merge($merged-screens, $extend-screens);
 
+// MERGED SIZES
+$merged-positive-sizes: ();
+@if ($positive-sizes != null) {
+  $merged-positive-sizes: map.deep-merge($merged-positive-sizes, $positive-sizes);
+}
+$merged-positive-sizes: map.deep-merge($merged-positive-sizes, $extend-positive-sizes);
+
+$merged-negative-sizes: ();
+@if ($negative-sizes != null) {
+  $merged-negative-sizes: map.deep-merge($merged-negative-sizes, $negative-sizes);
+}
+$merged-negative-sizes: map.deep-merge($merged-negative-sizes, $extend-negative-sizes);
+
+$merged-sizes: ();
+@if ($positive-sizes != null) {
+  $merged-sizes: map.deep-merge($merged-sizes, $positive-sizes);
+}
+@if ($negative-sizes != null) {
+  $merged-sizes: map.deep-merge($merged-sizes, $negative-sizes);
+}
+$merged-sizes: map.deep-merge($merged-sizes, $extend-positive-sizes);
+$merged-sizes: map.deep-merge($merged-sizes, $extend-negative-sizes);
+
+// MERGED SHADOWS
+$merged-shadows: ();
+@if ($shadows != null) {
+  $merged-shadows: map.deep-merge($merged-shadows, $shadows);
+}
+$merged-shadows: map.deep-merge($merged-shadows, $extend-shadows);
+
+// MERGED FONT FAMILIES
+$merged-font-families: ();
+@if ($font-families != null) {
+  $merged-font-families: map.deep-merge($merged-font-families, $font-families);
+}
+$merged-font-families: map.deep-merge($merged-font-families, $extend-font-families);
+
+// MERGED SIZES
+$merged-font-sizes: ();
+@if ($font-sizes != null) {
+  $merged-font-sizes: map.deep-merge($merged-font-sizes, $font-sizes);
+}
+$merged-font-sizes: map.deep-merge($merged-font-sizes, $extend-font-sizes);
+
+// MERGED WEIGHTS
+$merged-font-weights: ();
+@if ($font-weights != null) {
+  $merged-font-weights: map.deep-merge($merged-font-weights, $font-weights);
+}
+$merged-font-weights: map.deep-merge($merged-font-weights, $extend-font-weights);
+
+// MERGED LEADINGS
+$merged-leadings: ();
+@if ($leadings != null) {
+  $merged-leadings: map.deep-merge($merged-leadings, $leadings);
+}
+$merged-leadings: map.deep-merge($merged-leadings, $extend-leadings);
+
+// MERGED TRACKINGS
+$merged-trackings: ();
+@if ($trackings != null) {
+  $merged-trackings: map.deep-merge($merged-trackings, $trackings);
+}
+$merged-trackings: map.deep-merge($merged-trackings, $extend-trackings);
+
+// MERGED RADIUSES
+$merged-radiuses: ();
+@if ($radiuses != null) {
+  $merged-radiuses: map.deep-merge($merged-radiuses, $radiuses);
+}
+$merged-radiuses: map.deep-merge($merged-radiuses, $extend-radiuses);
+
+// MERGED TINT LEVELS
+$merged-tints: ();
+@if ($tints != null) {
+  $merged-tints: map.deep-merge($merged-tints, $tints);
+}
+$merged-tints: map.deep-merge($merged-tints, $extend-tints);
+
+// MERGED SHADE LEVELS
+$merged-shades: ();
+@if ($shades != null) {
+  $merged-shades: map.deep-merge($merged-shades, $shades);
+}
+$merged-shades: map.deep-merge($merged-shades, $extend-shades);
+
+// MERGED OPACITY LEVELS
+$merged-opacities: ();
+@if ($opacities != null) {
+  $merged-opacities: map.deep-merge($merged-opacities, $opacities);
+}
+$merged-opacities: map.deep-merge($merged-opacities, $extend-opacities);
+
+// MERGED COLORS
 $merged-colors: ();
 @if ($colors != null) {
   $merged-colors: map.deep-merge($merged-colors, $colors);
 }
-@if ($grayscale-colors != null) {
-  $merged-colors: map.deep-merge($merged-colors, $grayscale-colors);
+$merged-colors: map.deep-merge($merged-colors, $extend-colors);
+
+// MERGED GRADIENTS
+$merged-gradients: ();
+@if ($gradients != null) {
+  $merged-gradients: map.deep-merge($merged-gradients, $gradients);
 }
+$merged-gradients: map.deep-merge($merged-gradients, $extend-gradients);
 
-$merged-sizes: map.deep-merge($positive-sizes, $negative-sizes);
 
-
-// VARIABLIZED VARIABLES
-// ============================================================
-
-$var-radiuses: variablize-map($radiuses, radius);
-$var-shadows: variablize-map($shadows, shadow);
-$var-font-families: variablize-map($font-families, font);
-$var-font-sizes: variablize-map($font-sizes, font);
-$var-font-weights: variablize-map($font-weights, font);
-$var-leadings: variablize-map($leadings, leading);
-$var-trackings: variablize-map($trackings, tracking);
 
 
 // HELPER FUNCTIONS
 // ============================================================
 
-// SCREEN FUNCTIONS
+// GET SCREEN FUNCTIONS
 @function screen($screen) {
   $result: ();
   @if (map.get($all-config, screens, $screen)) {
@@ -649,11 +729,10 @@ $var-trackings: variablize-map($trackings, tracking);
   @return $result;
 }
 
-// COLOR FUNCTIONS
+// GET COLOR FUNCTIONS
 @function gradient($gradient) {
-  @if (map.get($gradients, $gradient)) {
-    $result: ();
-    $result: map.get($gradients, $gradient);
+  @if (map.get($merged-gradients, $gradient)) {
+    $result: var(--#{$gradient});
     @return $result;
   } @else {
     @error "[#{$gradient}] does not exist";
@@ -661,21 +740,8 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function gradients() {
-  $map: ();
-  @if ($gradients == null) {
-    @return $map;
-  } @else {
-    @return $gradients;
-  }  
-}
-
-@function tint-levels() {
-  @return $tint-levels;
-}
-
-@function var-tint-levels() {
   $result: ();
-  @each $key, $value in tint-levels() {
+  @each $key, $value in $merged-gradients {
     $map: (
       $key: var(--#{$key})
     );
@@ -684,33 +750,44 @@ $var-trackings: variablize-map($trackings, tracking);
   @return $result;
 }
 
-@function shade-levels() {
-  @return $shade-levels;
-}
-
-@function var-shade-levels() {
+@function tints() {
   $result: ();
-  @each $key, $value in shade-levels() {
+  @each $key, $value in $merged-tints {
     $map: (
-      $key: var(--#{$key})
+      $key: var(--tint-#{$key})
     );
     $result: map.merge($result, $map);
   }
   @return $result;
 }
 
-@function opacity-levels() {
-  @return $opacity-levels;
+@function shades() {
+  $result: ();
+  @each $key, $value in $merged-shades {
+    $map: (
+      $key: var(--shade-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
+@function opacities() {
+  $result: ();
+  @each $key, $value in $merged-opacities {
+    $map: (
+      $key: var(--opacity-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}
+
+// GET COLORS FUNCTIONS
 @function bg-colors() {
   $result: ();
   @each $key, $value in $merged-colors {
     @if (meta.type-of($value) == map) {
-      
-      $hue: map.get($value, hue);
-      $saturation: map.get($value, saturation);
-      $lightness: map.get($value, lightness);
 
       $map: ();
       
@@ -742,9 +819,7 @@ $var-trackings: variablize-map($trackings, tracking);
   $result: ();
   @each $key, $value in $merged-colors {
     @if (meta.type-of($value) == map) {
-      $hue: map.get($value, hue);
-      $saturation: map.get($value, saturation);
-      $lightness: map.get($value, lightness);
+
       $map: ();
       
       @if ($key == white) {
@@ -775,9 +850,6 @@ $var-trackings: variablize-map($trackings, tracking);
   $result: ();
   @each $key, $value in $merged-colors {
     @if (meta.type-of($value) == map) {
-      $hue: map.get($value, hue);
-      $saturation: map.get($value, saturation);
-      $lightness: map.get($value, lightness);
 
       $map: ();
       
@@ -809,9 +881,6 @@ $var-trackings: variablize-map($trackings, tracking);
   $result: ();
   @each $key, $value in $merged-colors {
     @if (meta.type-of($value) == map) {
-      $hue: map.get($value, hue);
-      $saturation: map.get($value, saturation);
-      $lightness: map.get($value, lightness);
 
       $map: ();
       
@@ -843,23 +912,20 @@ $var-trackings: variablize-map($trackings, tracking);
   $result: ();
   @each $key, $value in $merged-colors {
     @if (meta.type-of($value) == map) {
-      $hue: map.get($value, hue);
-      $saturation: map.get($value, saturation);
-      $lightness: map.get($value, lightness);
 
       $map: ();
       
       @if ($key == white) {
         $map: (
-          $key: hsla( #{$hue}, #{$saturation}, 100%, var(--split-opacity) )
+          $key: hsla( var(--#{$key}-hue), var(--#{$key}-sat), 100%, var(--split-opacity) )
         );
       } @else if ($key == black) {
         $map: (
-          $key: hsla( #{$hue}, #{$saturation}, 0%, var(--split-opacity) )
+          $key: hsla( var(--#{$key}-hue), var(--#{$key}-sat), 0%, var(--split-opacity) )
         );
       } @else {
         $map: (
-          $key: hsla( #{$hue}, #{$saturation}, var(--split-ltn), var(--split-opacity) )
+          $key: hsla( var(--#{$key}-hue), var(--#{$key}-sat), var(--split-ltn), var(--split-opacity) )
         );
       }
       $result: map.deep-merge($result, $map);
@@ -886,11 +952,10 @@ $var-trackings: variablize-map($trackings, tracking);
   @return $result;
 }
 
-// RADIUS FUNCTIONS
+// GET RADIUS FUNCTION
 @function radius($radius) {
-  @if (map.get($radiuses, $radius)) {
-    $result: ();
-    $result: map.get($var-radiuses, $radius);
+  @if (map.get($merged-radiuses, $radius)) {
+    $result: var(--radius-#{$radius});
     @return $result;
   } @else {
     @error "[#{$radius}] does not exist";
@@ -898,14 +963,20 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function radiuses() {
-  @return $var-radiuses;
+  $result: ();
+  @each $key, $value in $merged-radiuses {
+    $map: (
+      $key: var(--radius-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
-// SHADOW FUNCTIONS
+// GET SHADOW FUNCTIONS
 @function shadow($shadow) {
-  @if (map.get($shadows, $shadow)) {
-    $result: ();
-    $result: map.get($var-shadows, $shadow);
+  @if (map.get($merged-shadows, $shadow)) {
+    $result: var(--shadow-#{$shadow});
     @return $result;
   } @else {
     @error "[#{$shadow}] does not exist";
@@ -913,27 +984,33 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function shadows() {
-  @return $var-shadows;
+  $result: ();
+  @each $key, $value in $merged-shadows {
+    $map: (
+      $key: var(--shadow-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
-// SIZE FUNCTIONS
+// GET SIZE FUNCTIONS
 @function positive-sizes($limit: null) {
   @if ($limit != null) {
     $size-map: ();
 
     @for $i from 1 through $limit {
-      $map: list.nth($positive-sizes, $i);
+      $map: list.nth($merged-positive-sizes, $i);
       $key: list.nth($map, 1);
-      $value: list.nth($map, 2);
       $limit-map: (
-        $key: $value
+        $key: var(--size-#{$key})
       );
       $size-map: map.merge($size-map, $limit-map);
     }
 
     @return $size-map;
   } @else {
-    @return $positive-sizes;
+    @return $merged-positive-sizes;
   }
 }
 
@@ -942,18 +1019,17 @@ $var-trackings: variablize-map($trackings, tracking);
     $size-map: ();
 
     @for $i from 1 through $limit {
-      $map: list.nth($negative-sizes, $i);
+      $map: list.nth($merged-negative-sizes, $i);
       $key: list.nth($map, 1);
-      $value: list.nth($map, 2);
       $limit-map: (
-        $key: $value
+        $key: var(--size-#{$key})
       );
       $size-map: map.merge($size-map, $limit-map);
     }
 
     @return $size-map;
   } @else {
-    @return $negative-sizes;
+    @return $merged-negative-sizes;
   }
 }
 
@@ -987,11 +1063,10 @@ $var-trackings: variablize-map($trackings, tracking);
   }
 }
 
-// TYPOGRAPHY FUNCTIONS
+// GET TYPOGRAPHY FUNCTIONS
 @function font-family($font-family) {
-  @if (map.get($font-families, $font-family)) {
-    $result: ();
-    $result: map.get($var-font-families, $font-family);
+  @if (map.get($merged-font-families, $font-family)) {
+    $result: var(--font-#{$font-family});
     @return $result;
   } @else {
     @error "[#{$font-family}] does not exist";
@@ -999,13 +1074,19 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function font-families() {
-  @return $var-font-families;
+  $result: ();
+  @each $key, $value in $merged-font-families {
+    $map: (
+      $key: var(--font-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
 @function font-size($font-size) {
-  @if (map.get($font-sizes, $font-size)) {
-    $result: ();
-    $result: map.get($var-font-sizes, $font-size);
+  @if (map.get($merged-font-sizes, $font-size)) {
+    $result: var(--font-#{$font-size});
     @return $result;
   } @else {
     @error "[#{$font-size}] does not exist";
@@ -1013,13 +1094,19 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function font-sizes() {
-  @return $var-font-sizes;
+  $result: ();
+  @each $key, $value in $merged-font-sizes {
+    $map: (
+      $key: var(--font-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
 @function font-weight($font-weight) {
-  @if (map.get($font-weights, $font-weight)) {
-    $result: ();
-    $result: map.get($var-font-weights, $font-weight);
+  @if (map.get($merged-font-weights, $font-weight)) {
+    $result: var(--font-#{$font-weight});
     @return $result;
   } @else {
     @error "[#{$font-weight}] does not exist";
@@ -1027,13 +1114,19 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function font-weights() {
-  @return $var-font-weights;
+  $result: ();
+  @each $key, $value in $merged-font-weights {
+    $map: (
+      $key: var(--font-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
 @function leading($leading) {
-  @if (map.get($leadings, $leading)) {
-    $result: ();
-    $result: map.get($var-leadings, $leading);
+  @if (map.get($merged-leadings, $leading)) {
+    $result: var(--leading-#{$leading});
     @return $result;
   } @else {
     @error "[#{$leading}] does not exist";
@@ -1041,13 +1134,19 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function leadings() {
-  @return $var-leadings;
+  $result: ();
+  @each $key, $value in $merged-leadings {
+    $map: (
+      $key: var(--leading-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
 @function tracking($tracking) {
-  @if (map.get($trackings, $tracking)) {
-    $result: ();
-    $result: map.get($var-trackings, $tracking);
+  @if (map.get($merged-trackings, $tracking)) {
+    $result: var(--tracking-#{$tracking});
     @return $result;
   } @else {
     @error "[#{$tracking}] does not exist";
@@ -1055,7 +1154,14 @@ $var-trackings: variablize-map($trackings, tracking);
 }
 
 @function trackings() {
-  @return $var-trackings;
+  $result: ();
+  @each $key, $value in $merged-trackings {
+    $map: (
+      $key: var(--tracking-#{$key})
+    );
+    $result: map.merge($result, $map);
+  }
+  @return $result;
 }
 
 // HELPER MIXINS
@@ -1077,62 +1183,71 @@ $var-trackings: variablize-map($trackings, tracking);
 // ROOT VARIABLES
 // ============================================================
 
-// Create root variables if CSS custom property setting is enabled
-:root {
-  --FONT-FAMILIES-----------------:#01;
-  @each $key, $value in $font-families {
-    --font-#{'' + $key}: #{$value};
-  }
-  --FONT-SIZES--------------------:#02;
-  @each $key, $value in $font-sizes {
-    --font-#{'' + $key}: #{$value};
-  }
-  --FONT-WEIGHTS------------------:#03;
-  @each $key, $value in $font-weights {
-    --font-#{'' + $key}: #{$value};
-  }
-  --LEADING-----------------------:#04;
-  @each $key, $value in $leadings {
-    --leading-#{'' + $key}: #{$value};
-  }
-  --TRACKING----------------------:#05;
-  @each $key, $value in $trackings {
-    --tracking-#{'' + $key}: #{$value};
-  }
-  --RADIUS------------------------:#06;
-  @each $key, $value in $radiuses {
-    --radius-#{'' + $key}: #{$value};
-  }
-  --SHADOWS-----------------------:#07;
-  @each $key, $value in $shadows {
-    --shadow-#{'' + $key}: #{$value};
-  }
-  --TINT-LEVELS-------------------:#08;
-  @each $key, $value in $tint-levels {
-    --#{'' + $key}: #{$value};
-  }
-  --SHADE-LEVELS------------------:#09;
-  @each $key, $value in $shade-levels {
-    --#{'' + $key}: #{$value};
-  }
-  --OPACITY-LEVELS----------------:#10;
-  @each $key, $value in $opacity-levels {
-    --#{'' + $key}: #{$value};
-  }
-  --COLORS------------------------:#11;
-  @each $color, $color-value in $merged-colors {
-    @if (meta.type-of($color-value) == map) {
-      @each $key, $value in $color-value {
-        --#{'' + $color}-#{'' + $key}: #{$value};
+@if ($headless == false) {
+  :root {
+    --FONT-FAMILIES-----------------:#01;
+    @each $key, $value in $merged-font-families {
+      --font-#{'' + $key}: #{$value};
+    }
+    --FONT-SIZES--------------------:#02;
+    @each $key, $value in $merged-font-sizes {
+      --font-#{'' + $key}: #{$value};
+    }
+    --FONT-WEIGHTS------------------:#03;
+    @each $key, $value in $merged-font-weights {
+      --font-#{'' + $key}: #{$value};
+    }
+    --LEADING-----------------------:#04;
+    @each $key, $value in $merged-leadings {
+      --leading-#{'' + $key}: #{$value};
+    }
+    --TRACKING----------------------:#05;
+    @each $key, $value in $merged-trackings {
+      --tracking-#{'' + $key}: #{$value};
+    }
+    --RADIUS------------------------:#06;
+    @each $key, $value in $merged-radiuses {
+      --radius-#{'' + $key}: #{$value};
+    }
+    --SHADOWS-----------------------:#07;
+    @each $key, $value in $merged-shadows {
+      --shadow-#{'' + $key}: #{$value};
+    }
+    --TINTS-------------------------:#08;
+    @each $key, $value in $merged-tints {
+      --tint-#{'' + $key}: #{$value};
+    }
+    --SHADES------------------------:#09;
+    @each $key, $value in $merged-shades {
+      --shade-#{'' + $key}: #{$value};
+    }
+    --OPACITIES---------------------:#10;
+    @each $key, $value in $merged-opacities {
+      --opacity-#{'' + $key}: #{$value};
+    }
+    --COLORS------------------------:#11;
+    @each $color, $color-value in $merged-colors {
+      @if (meta.type-of($color-value) == map) {
+        @each $key, $value in $color-value {
+          --#{'' + $color}-#{'' + $key}: #{$value};
+        }
+      } @else {
+        --#{'' + $color}: #{$color-value};
       }
-    } @else {
-      --#{'' + $color}: #{$color-value};
+    }
+    --GRADIENTS---------------------:#12;
+    @each $gradient, $gradient-value in $merged-gradients {
+      @if (meta.type-of($gradient-value) == map) {
+        @each $key, $value in $gradient-value {
+          --#{'' + $gradient}-#{'' + $key}: #{$value};
+        }
+      } @else {
+        --#{'' + $gradient}: #{$gradient-value};
+      }
+    }
+    --SIZES-------------------------:#13;
+    @each $key, $value in $merged-sizes {
+      --size-#{'' + $key}: #{$value};
     }
   }
-
-  --SHADE-LEVELS------------------:#12;
-  @each $key, $value in $merged-sizes {
-    --size-#{'' + $key}: #{$value};
-  }
-  
 }

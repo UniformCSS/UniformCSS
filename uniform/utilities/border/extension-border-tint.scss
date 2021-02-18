@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: border-tint;
-$shorthand: border;
+$shorthand: border-tint;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: null;
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-tint-levels(),
+    core.tints(),
 	)
 );
 

@@ -119,6 +119,7 @@ $include: map.get($all-config, include);
       background: var(--markdown-code-bg, hsla( var(--blue-hue), var(--blue-sat), 50%, var(--opacity-10) ));
       border: var(--markdown-code-border, 0);
       color: var(--markdown-code-color, hsl( var(--blue-hue), var(--blue-sat), 50% ));
+      white-space: nowrap;
     }
 
     /******************************
@@ -133,9 +134,9 @@ $include: map.get($all-config, include);
 
     & > blockquote {
       margin-bottom: var(--markdown-blockquote-margin, 1.5em);
-      padding: var(--markdown-blockquote-padding, var(--size-14, 24));
-      background: var(--markdown-blockquote-bg, hsl( var(--gray-hue), var(--gray-sat), var(--tint-800) ));
-      border-radius: var(--markdown-blockquote-radius, var(--radius-xs));
+      padding: var(--markdown-blockquote-padding, var(--size-16) var(--size-24));
+      background: var(--markdown-blockquote-bg, hsl( var(--cool-gray-hue), var(--gray-sat), 50%, var(--opacity-10) ));
+      border-radius: var(--markdown-blockquote-radius, 0);
       box-shadow: var(--markdown-blockquote-shadow, inset 4px 0px 0px 0px hsl( var(--gray-hue), var(--gray-sat), var(--tint-600) ));
       
       &:last-child {

@@ -12,7 +12,28 @@ $custom-properties: ();
 
 $variants: (
   core.merge(
-    core.trackings()
+    core.trackings(),
+    (
+      n9: -0.09em,
+      n8: -0.08em,
+      n7: -0.07em,
+      n6: -0.06em,
+      n5: -0.05em,
+      n4: -0.04em,
+      n3: -0.03em,
+      n2: -0.02em,
+      n1: -0.01em,
+      0: 0,
+      1: 0.01em,
+      2: 0.02em,
+      3: 0.03em,
+      4: 0.04em,
+      5: 0.05em,
+      6: 0.06em,
+      7: 0.07em,
+      8: 0.08em,
+      9: 0.09em,
+    )
   )
 );
 

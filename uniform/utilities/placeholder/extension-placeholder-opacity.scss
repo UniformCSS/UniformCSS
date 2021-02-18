@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: placeholder-opacity;
-$shorthand: placeholder;
+$shorthand: placeholder-opacity;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: #{'::placeholder'};
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.opacity-levels(),
+    core.opacities(),
 	)
 );
 

@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: border-shade;
-$shorthand: border;
+$shorthand: border-shade;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: null;
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-shade-levels(),
+    core.shades(),
 	)
 );
 

@@ -12,7 +12,10 @@ $custom-properties: ();
 
 $variants: (
   core.merge(
-    core.gradients()
+    core.gradients(),
+    (
+      gradient: linear-gradient(var(--gradient)),
+    )
 	)
 );
 

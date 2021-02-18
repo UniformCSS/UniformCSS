@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: color-opacity;
-$shorthand: color;
+$shorthand: color-opacity;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: null;
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.opacity-levels(),
+    core.opacities(),
 	)
 );
 

@@ -22,21 +22,21 @@ $include: map.get($all-config, include);
     width: 100%;
     margin: auto;
     max-width: var(--wrapper-max-width, 808px);
-    padding-left: var(--wrapper-padding, size(20));
-    padding-right: var(--wrapper-padding, size(20));
+    padding-left: var(--wrapper-padding, var(--size-20));
+    padding-right: var(--wrapper-padding, var(--size-20));
     @include screen(md) {
-      padding-left: var(--wrapper-sm-padding, size(20));
-      padding-right: var(--wrapper-sm-padding, size(20));
+      padding-left: var(--wrapper-sm-padding, var(--size-20));
+      padding-right: var(--wrapper-sm-padding, var(--size-20));
       max-width: var(--wrapper-sm-max-width, 1064px);
     }
     @include screen(lg) {
-      padding-left: var(--wrapper-md-padding, size(20));
-      padding-right: var(--wrapper-md-padding, size(20));
+      padding-left: var(--wrapper-md-padding, var(--size-20));
+      padding-right: var(--wrapper-md-padding, var(--size-20));
       max-width: var(--wrapper-md-max-width, 1180px);
     }
     @include screen(xl) {
-      padding-left: var(--wrapper-lg-padding, size(20));
-      padding-right: var(--wrapper-lg-padding, size(20));
+      padding-left: var(--wrapper-lg-padding, var(--size-20));
+      padding-right: var(--wrapper-lg-padding, var(--size-20));
       max-width: var(--wrapper-lg-max-width, 1320px);
     }
   }

@@ -2,7 +2,7 @@
 @use "sass:map";
 
 $name: placeholder-shade;
-$shorthand: placeholder;
+$shorthand: placeholder-shade;
 $responsive: false;
 $responsive-pseudos: false;
 $extra-selector: #{'::placeholder'};
@@ -12,7 +12,7 @@ $custom-properties: ();
 
 $variants: (
 	core.merge(
-    core.var-shade-levels(),
+    core.shades(),
 	)
 );
 
